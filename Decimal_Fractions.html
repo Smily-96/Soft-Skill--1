@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Decimal Fractions – Aptitude Mastery Program</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@400;700&family=JetBrains+Mono:wght@400;600&display=swap');
+:root{
+  --navy:#0f2447;--blue:#1a4080;--sky:#2563eb;--accent:#f59e0b;
+  --accent2:#10b981;--red:#ef4444;--white:#fff;
+  --gray:#64748b;--border:#dde3f0;--card:#fff;--text:#1e293b;--muted:#475569;
+  --ocean:#006d8f;--ocean-dark:#004d66;--pale-purple:#cdb8e8;
+  --pale-green:#bfe6c8;--pale-green-dark:#9ed4ac;--pale-blue:#bcd9f2;--pale-blue-dark:#9cc3ea;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter',sans-serif;background:#eef2fb;color:var(--text);line-height:1.7;}
+
+/* NAV */
+nav{background:linear-gradient(135deg,var(--pale-green) 0%,var(--pale-green-dark) 100%);padding:8px 20px;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:100;box-shadow:0 2px 16px rgba(0,0,0,.15);flex-wrap:nowrap;}
+.nav-logo{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+.nav-logo-badge{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:9px;flex-shrink:0;position:relative;background:var(--navy);border:1.5px solid var(--accent);box-shadow:inset 0 0 0 1px rgba(245,158,11,.3),0 0 8px rgba(245,158,11,.18);}
+.nav-logo-badge::before{content:'';position:absolute;inset:4px;border:1px solid rgba(245,158,11,.6);border-radius:6px;pointer-events:none;}
+.nav-logo-badge::after{content:'';position:absolute;inset:7px;border:1px solid rgba(245,158,11,.32);border-radius:4px;pointer-events:none;}
+.nav-logo-badge span{font-family:'Merriweather',serif;font-weight:800;font-size:.86rem;letter-spacing:.3px;color:var(--accent);position:relative;z-index:1;}
+.nav-logo-text{display:flex;flex-direction:column;line-height:1.1;}
+.nav-logo-main{color:var(--navy);font-weight:800;font-size:.92rem;font-family:'Merriweather',serif;letter-spacing:.2px;white-space:nowrap;}
+.nav-college-logo{height:30px;object-fit:contain;flex-shrink:0;margin-left:4px;padding-left:10px;border-left:1px solid rgba(15,36,71,.25);}
+.nav-links{display:flex;gap:3px;flex-wrap:nowrap;margin-left:auto;overflow-x:auto;}
+.nav-links a{color:var(--navy);text-decoration:none;font-size:.72rem;font-weight:600;padding:5px 10px;border-radius:18px;transition:all .2s;white-space:nowrap;}
+.nav-links a:hover,.nav-links a.active{background:var(--navy);color:#fff;}
+
+/* HERO — compact ~2cm strip */
+.hero{background:linear-gradient(135deg,var(--pale-blue) 0%,#a8c9ec 55%,var(--pale-blue-dark) 100%);color:#16335c;height:76px;min-height:76px;max-height:76px;position:relative;overflow:hidden;display:flex;align-items:center;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 25% 50%,rgba(255,255,255,.25) 0%,transparent 65%),radial-gradient(ellipse at 75% 40%,rgba(245,158,11,.12) 0%,transparent 60%);}
+.hero-content{position:relative;z-index:1;max-width:1100px;width:100%;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:nowrap;overflow:hidden;}
+.hero-title{font-family:'Merriweather',serif;font-size:1.15rem;font-weight:700;line-height:1.1;white-space:nowrap;}
+.hero-title span{color:var(--accent);}
+
+/* INSTRUCTOR PILL */
+.instructor-pill{display:inline-flex;align-items:center;gap:9px;background:rgba(255,255,255,.4);border:1px solid rgba(22,51,92,.18);border-radius:50px;padding:4px 14px 4px 4px;flex-shrink:0;}
+.inst-photo{width:34px;height:34px;border-radius:50%;border:2px solid var(--accent);box-shadow:0 0 0 2px rgba(245,158,11,.2);object-fit:cover;flex-shrink:0;display:block;}
+.inst-details{display:flex;flex-direction:column;}
+.inst-label{font-size:.56rem;color:#8a5200;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:0;line-height:1.1;}
+.inst-name{font-size:.78rem;font-weight:700;color:#16335c;line-height:1.15;}
+.inst-role{font-size:.6rem;color:#3d5a82;line-height:1.2;}
+
+/* LAYOUT */
+.container{max-width:960px;margin:0 auto;padding:40px 20px;}
+.page{display:none;}.page.active{display:block;}
+
+/* STUDY SECTIONS */
+.study-section{background:var(--card);border-radius:16px;border:1px solid var(--border);margin-bottom:24px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.05);}
+.section-header{padding:18px 26px;display:flex;align-items:center;gap:14px;cursor:pointer;user-select:none;background:linear-gradient(90deg,#f8faff,white);border-bottom:1px solid var(--border);}
+.section-header:hover{background:#f0f4ff;}
+.section-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;}
+.section-header h2{font-size:1rem;font-weight:700;color:var(--navy);flex:1;}
+.section-header .toggle{color:var(--gray);font-size:1.1rem;transition:transform .3s;}
+.section-header.open .toggle{transform:rotate(180deg);}
+.section-body{padding:26px;display:none;}.section-body.open{display:block;}
+
+/* DEF BOXES */
+.def-box{border-left:4px solid var(--sky);background:linear-gradient(90deg,#f0f6ff,#f8fbff);border-radius:0 10px 10px 0;padding:14px 18px;margin-bottom:14px;}
+.def-box .def-title{font-weight:700;color:var(--navy);font-size:.97rem;margin-bottom:5px;display:flex;align-items:center;gap:8px;}
+.def-box .def-title span{background:var(--sky);color:white;font-size:.62rem;padding:2px 8px;border-radius:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;}
+.def-box p{color:var(--text);font-size:.93rem;}
+.def-box .notation{font-family:'JetBrains Mono',monospace;background:rgba(37,99,235,.08);border-radius:6px;padding:8px 12px;margin-top:8px;font-size:.88rem;color:var(--navy);font-weight:600;}
+.def-box.green{border-color:var(--accent2);background:linear-gradient(90deg,#f0fdf8,#f8fffe);}
+.def-box.green .def-title span{background:var(--accent2);}
+.def-box.amber{border-color:var(--accent);background:linear-gradient(90deg,#fffbf0,#fffef8);}
+.def-box.amber .def-title span{background:var(--accent);color:#000;}
+.def-box.red{border-color:var(--red);background:linear-gradient(90deg,#fff5f5,#fff8f8);}
+.def-box.red .def-title span{background:var(--red);}
+.def-box.purple{border-color:#8b5cf6;background:linear-gradient(90deg,#faf5ff,#fdf8ff);}
+.def-box.purple .def-title span{background:#8b5cf6;}
+.def-box.teal{border-color:#0891b2;background:linear-gradient(90deg,#ecfeff,#f0fdff);}
+.def-box.teal .def-title span{background:#0891b2;}
+
+/* FORMULAS */
+.formula-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin:14px 0;}
+.formula-card{background:var(--navy);color:white;border-radius:12px;padding:16px;}
+.formula-card .f-label{font-size:.72rem;color:#94a3b8;text-transform:uppercase;letter-spacing:1px;margin-bottom:7px;}
+.formula-card .f-eq{font-family:'JetBrains Mono',monospace;font-size:.9rem;color:var(--accent);font-weight:600;line-height:1.7;}
+
+/* DIV TABLE */
+.div-table{width:100%;border-collapse:collapse;margin:14px 0;border-radius:10px;overflow:hidden;}
+.div-table th{background:var(--navy);color:white;padding:11px 14px;text-align:left;font-size:.83rem;font-weight:600;}
+.div-table td{padding:10px 14px;font-size:.86rem;border-bottom:1px solid var(--border);vertical-align:top;}
+.div-table tr:nth-child(even) td{background:#f8faff;}
+.div-table tr:last-child td{border-bottom:none;}
+.num-badge{display:inline-flex;align-items:center;justify-content:center;background:var(--sky);color:white;border-radius:6px;min-width:34px;padding:2px 8px;font-weight:700;font-size:.88rem;}
+.rule-text{color:var(--muted);}
+.example-text{font-family:'JetBrains Mono',monospace;color:var(--navy);font-size:.8rem;}
+
+/* UNIT TABLE */
+.unit-table{width:100%;border-collapse:collapse;margin:14px 0;}
+.unit-table th{background:var(--navy);color:white;padding:10px 14px;text-align:left;font-size:.83rem;}
+.unit-table td{padding:10px 14px;border-bottom:1px solid var(--border);font-size:.86rem;}
+.unit-table tr:nth-child(even) td{background:#f8faff;}
+
+/* MATH GRID */
+.math-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px;margin:14px 0;}
+.math-item{background:#f8faff;border:1px solid #dde3f0;border-radius:10px;padding:12px 14px;font-family:'JetBrains Mono',monospace;font-size:.86rem;color:var(--navy);}
+.math-item .idx{color:var(--sky);font-weight:700;margin-right:8px;}
+
+/* WORKED EXAMPLE */
+.worked-example{background:#f0fdf8;border:1px solid #bbf7d0;border-radius:12px;padding:16px 18px;margin:12px 0;}
+.worked-example .we-q{font-weight:700;color:var(--navy);margin-bottom:8px;font-size:.93rem;}
+.worked-example .we-a{color:#065f46;font-size:.88rem;line-height:1.8;}
+.worked-example .we-a code{background:rgba(16,185,129,.12);padding:1px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.83rem;font-weight:600;}
+
+/* INTERACTIVE STEP-BY-STEP SOLUTION */
+.btn-reveal{background:var(--accent2);color:#fff;border:none;padding:9px 18px;border-radius:8px;font-size:.82rem;font-weight:700;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:7px;box-shadow:0 2px 6px rgba(16,185,129,.25);}
+.btn-reveal:hover{background:#059669;transform:translateY(-1px);}
+.btn-reveal.btn-done{background:var(--sky);box-shadow:0 2px 6px rgba(37,99,235,.25);}
+.btn-reveal.btn-done:hover{background:#1d4ed8;}
+.step-list{list-style:none;margin-top:14px;padding-left:2px;counter-reset:stepnum;}
+.step-line{display:none;padding:9px 14px 9px 16px;position:relative;font-size:.87rem;color:#065f46;line-height:1.65;border-left:2px solid #bbf7d0;margin-left:14px;margin-bottom:2px;counter-increment:stepnum;}
+.step-line.revealed{display:block;animation:stepIn .35s ease forwards;}
+.step-line::before{content:counter(stepnum);position:absolute;left:-15px;top:7px;background:var(--accent2);color:#fff;width:24px;height:24px;border-radius:50%;font-size:.72rem;font-weight:700;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 3px #f0fdf8;}
+.step-line code{background:rgba(16,185,129,.14);padding:1px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.83rem;font-weight:600;}
+.step-line.final-step{border-left-color:var(--sky);background:rgba(37,99,235,.06);border-radius:0 8px 8px 0;font-weight:700;color:var(--navy);padding-top:10px;padding-bottom:10px;}
+.step-line.final-step::before{content:'✓';background:var(--sky);}
+@keyframes stepIn{from{opacity:0;transform:translateY(-5px);}to{opacity:1;transform:translateY(0);}}
+
+/* NOTE BOX */
+.note-box{background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:13px 16px;margin:12px 0;font-size:.86rem;color:#78350f;}
+.note-box strong{color:#92400e;}
+
+/* KEY POINTS */
+.key-points{list-style:none;}
+.key-points li{padding:7px 0;border-bottom:1px solid #f1f5f9;padding-left:22px;position:relative;font-size:.91rem;}
+.key-points li::before{content:'▶';position:absolute;left:0;color:var(--sky);font-size:.6rem;top:11px;}
+.key-points li:last-child{border-bottom:none;}
+
+/* SUMMARY TABLE */
+.summary-table{width:100%;border-collapse:collapse;}
+.summary-table th{background:var(--sky);color:white;padding:10px 14px;font-size:.83rem;text-align:left;}
+.summary-table td{padding:10px 14px;font-size:.86rem;border-bottom:1px solid var(--border);}
+.summary-table tr:nth-child(even) td{background:#f8faff;}
+.tag{display:inline-block;padding:2px 8px;border-radius:6px;font-size:.73rem;font-weight:600;}
+.tag-blue{background:#dbeafe;color:#1e40af;}.tag-green{background:#dcfce7;color:#14532d;}
+
+/* MCQ */
+.mcq-intro{background:var(--card);border-radius:16px;border:1px solid var(--border);padding:40px;text-align:center;margin-bottom:24px;box-shadow:0 2px 10px rgba(0,0,0,.05);}
+.mcq-intro h2{font-family:'Merriweather',serif;font-size:1.8rem;color:var(--navy);margin-bottom:10px;}
+.mcq-intro p{color:var(--muted);margin-bottom:28px;font-size:.93rem;}
+.level-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;}
+.level-card{border-radius:14px;padding:28px 18px;text-align:center;cursor:pointer;transition:all .2s;border:2px solid transparent;position:relative;}
+.level-card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,.12);}
+.level-card.easy{background:linear-gradient(135deg,#f0fdf4,#dcfce7);border-color:#86efac;}
+.level-card.medium{background:linear-gradient(135deg,#fffbeb,#fef3c7);border-color:#fcd34d;}
+.level-card.hard{background:linear-gradient(135deg,#fff1f2,#ffe4e6);border-color:#fca5a5;}
+.level-card .lc-icon{font-size:2.4rem;margin-bottom:10px;}
+.level-card .lc-title{font-weight:700;font-size:1rem;color:var(--navy);margin-bottom:4px;}
+.level-card .lc-sub{font-size:.8rem;color:var(--muted);}
+.level-card .lc-badge{display:inline-block;margin-top:10px;padding:3px 12px;border-radius:12px;font-size:.73rem;font-weight:600;}
+.easy .lc-badge{background:#86efac;color:#14532d;}
+.medium .lc-badge{background:#fcd34d;color:#78350f;}
+.hard .lc-badge{background:#fca5a5;color:#7f1d1d;}
+.lc-status{margin-top:10px;font-size:.78rem;font-weight:700;min-height:18px;}
+.lc-status.done{color:#15803d;}
+.lc-status.done::before{content:'✓ ';}
+
+/* OVERALL PROGRESS */
+.overall-progress{margin-top:30px;padding-top:22px;border-top:1px solid var(--border);}
+.op-label{font-size:.88rem;font-weight:700;color:var(--navy);margin-bottom:8px;}
+.op-bar{max-width:420px;margin:0 auto 10px;height:9px;}
+.op-bar .progress-bar-fill{background:linear-gradient(90deg,var(--accent2),var(--accent));}
+.op-hint{font-size:.8rem;color:var(--muted);}
+.op-hint.ready{color:#15803d;font-weight:700;}
+
+/* CERT BUTTON ON INTRO */
+.cert-cta{display:inline-block;margin-top:16px;}
+
+/* QUIZ */
+.quiz-container{display:none;}.quiz-container.active{display:block;}
+.quiz-header{background:var(--navy);color:white;border-radius:14px;padding:20px 26px;display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;flex-wrap:wrap;gap:14px;}
+.quiz-header .qh-left h3{font-size:1.05rem;font-weight:700;margin-bottom:3px;}
+.quiz-header .qh-left p{font-size:.8rem;color:#94a3b8;}
+.progress-bar-wrap{flex:1;min-width:150px;max-width:260px;}
+.progress-bar-label{font-size:.76rem;color:#94a3b8;margin-bottom:5px;display:flex;justify-content:space-between;}
+.progress-bar-bg{background:rgba(255,255,255,.15);border-radius:10px;height:7px;}
+.progress-bar-fill{background:var(--accent);border-radius:10px;height:7px;transition:width .4s;}
+.question-card{background:var(--card);border-radius:14px;border:1px solid var(--border);padding:26px;margin-bottom:18px;box-shadow:0 2px 8px rgba(0,0,0,.04);}
+.q-number{display:inline-block;background:var(--sky);color:white;font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:10px;letter-spacing:1px;text-transform:uppercase;margin-bottom:13px;}
+.q-text{font-size:.98rem;font-weight:600;color:var(--navy);margin-bottom:18px;line-height:1.6;}
+.options{display:grid;gap:9px;}
+.option{display:flex;align-items:center;gap:13px;padding:12px 16px;border:2px solid var(--border);border-radius:10px;cursor:pointer;transition:all .2s;background:white;}
+.option:hover{border-color:var(--sky);background:#f0f6ff;}
+.option.selected{border-color:var(--sky);background:#eff6ff;}
+.option.correct{border-color:var(--accent2);background:#f0fdf4;}
+.option.wrong{border-color:var(--red);background:#fff5f5;}
+.option-key{width:29px;height:29px;border-radius:50%;background:#f1f5f9;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem;color:var(--muted);flex-shrink:0;transition:all .2s;}
+.option.selected .option-key{background:var(--sky);color:white;}
+.option.correct .option-key{background:var(--accent2);color:white;}
+.option.wrong .option-key{background:var(--red);color:white;}
+.option-text{font-size:.9rem;color:var(--text);}
+.explanation{display:none;margin-top:14px;padding:12px 16px;background:#fffbeb;border:1px solid #fde68a;border-radius:10px;font-size:.86rem;color:#78350f;line-height:1.6;}
+.explanation.show{display:block;}
+.quiz-nav{display:flex;gap:12px;justify-content:flex-end;margin-top:8px;}
+.btn{padding:10px 22px;border-radius:10px;font-weight:600;font-size:.86rem;cursor:pointer;border:none;transition:all .2s;}
+.btn-primary{background:var(--sky);color:white;}.btn-primary:hover{background:#1d4ed8;}
+.btn-secondary{background:white;color:var(--navy);border:2px solid var(--border);}.btn-secondary:hover{border-color:var(--sky);color:var(--sky);}
+.btn-success{background:var(--accent2);color:white;}.btn-success:hover{background:#059669;}
+.btn-accent{background:var(--accent);color:#000;}.btn-accent:hover{background:#d97706;}
+
+/* RESULTS */
+.results-panel{background:var(--card);border-radius:16px;border:1px solid var(--border);padding:40px;text-align:center;box-shadow:0 2px 10px rgba(0,0,0,.05);}
+.score-ring{width:120px;height:120px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 22px;font-size:2.2rem;font-weight:800;color:white;border:5px solid rgba(255,255,255,.3);}
+.score-ring .score-label{font-size:.68rem;font-weight:500;opacity:.85;letter-spacing:1px;text-transform:uppercase;margin-top:2px;}
+.results-panel h3{font-family:'Merriweather',serif;font-size:1.5rem;color:var(--navy);margin-bottom:8px;}
+.results-panel p{color:var(--muted);margin-bottom:22px;}
+.result-stats{display:flex;justify-content:center;gap:28px;flex-wrap:wrap;margin-bottom:24px;}
+.result-stat{text-align:center;}
+.result-stat .rs-num{font-size:1.7rem;font-weight:800;}
+.result-stat .rs-lbl{font-size:.73rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;}
+.rs-correct .rs-num{color:var(--accent2);}.rs-wrong .rs-num{color:var(--red);}.rs-score .rs-num{color:var(--sky);}
+.review-table{width:100%;border-collapse:collapse;margin-top:22px;border-radius:10px;overflow:hidden;}
+.review-table th{background:var(--navy);color:white;padding:9px 12px;font-size:.8rem;text-align:left;}
+.review-table td{padding:9px 12px;font-size:.83rem;border-bottom:1px solid var(--border);vertical-align:top;}
+.review-table tr:nth-child(even) td{background:#f8faff;}
+.rv-exp{margin-top:6px;font-size:.78rem;color:#78350f;background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:8px 10px;line-height:1.55;font-weight:400;}
+.rv-correct{color:var(--accent2);font-weight:700;}.rv-wrong{color:var(--red);font-weight:700;}
+
+/* REGISTRATION */
+.reg-panel{background:var(--card);border-radius:16px;border:1px solid var(--border);padding:40px;box-shadow:0 2px 10px rgba(0,0,0,.05);max-width:500px;margin:0 auto;}
+.reg-panel h3{font-family:'Merriweather',serif;font-size:1.4rem;color:var(--navy);margin-bottom:7px;text-align:center;}
+.reg-panel>p{color:var(--muted);text-align:center;margin-bottom:24px;font-size:.88rem;}
+.form-group{margin-bottom:16px;}
+.form-group label{display:block;font-weight:600;font-size:.83rem;color:var(--navy);margin-bottom:6px;}
+.form-group input,.form-group select{width:100%;padding:10px 13px;border:2px solid var(--border);border-radius:8px;font-size:.9rem;color:var(--text);transition:border .2s;outline:none;font-family:'Inter',sans-serif;}
+.form-group input:focus{border-color:var(--sky);}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+
+/* CERTIFICATE */
+#certificate-wrapper{display:none;}
+.cert-container{max-width:800px;margin:0 auto;background:white;border-radius:18px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.15);}
+#certificate{padding:40px 56px 48px;background:white;position:relative;font-family:'Merriweather',serif;}
+#certificate::before{content:'';position:absolute;inset:14px;border:3px solid var(--navy);border-radius:10px;pointer-events:none;}
+#certificate::after{content:'';position:absolute;inset:20px;border:1px solid var(--accent);border-radius:7px;pointer-events:none;}
+.cert-header{text-align:center;margin-bottom:22px;padding-top:6px;}
+.cert-org{font-size:.77rem;letter-spacing:4px;text-transform:uppercase;color:var(--sky);font-family:'Inter',sans-serif;font-weight:600;margin-bottom:5px;}
+.cert-title-main{font-size:2.2rem;color:var(--navy);font-weight:700;margin-bottom:5px;line-height:1.2;}
+.cert-title-main span{color:var(--accent);}
+.cert-subtitle{font-size:.9rem;color:var(--muted);font-family:'Inter',sans-serif;}
+.cert-divider{height:3px;background:linear-gradient(90deg,transparent,var(--navy),var(--accent),var(--navy),transparent);margin:22px 0;border-radius:2px;}
+.cert-body{text-align:center;}
+.cert-presented{font-size:.82rem;color:var(--muted);font-family:'Inter',sans-serif;letter-spacing:2px;text-transform:uppercase;margin-bottom:9px;}
+.cert-name{font-size:1.9rem;color:var(--navy);font-weight:700;margin-bottom:5px;border-bottom:2px solid var(--accent);display:inline-block;padding-bottom:4px;}
+.cert-class{font-size:.85rem;color:var(--muted);font-family:'Inter',sans-serif;font-weight:600;margin-top:8px;letter-spacing:.3px;}
+.cert-desc{font-size:.9rem;color:var(--muted);font-family:'Inter',sans-serif;margin:16px auto;max-width:480px;line-height:1.7;}
+.cert-level-scores{display:flex;justify-content:center;gap:14px;margin:14px auto 6px;flex-wrap:wrap;}
+.cert-level-item{background:#f8faff;border:1px solid var(--border);border-radius:10px;padding:8px 18px;min-width:108px;}
+.cert-level-item .cli-label{font-size:.66rem;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;font-family:'Inter',sans-serif;font-weight:600;}
+.cert-level-item .cli-score{font-size:1.15rem;font-weight:800;color:var(--navy);margin-top:2px;}
+.cert-level-item.easy .cli-score{color:#15803d;}
+.cert-level-item.medium .cli-score{color:#b45309;}
+.cert-level-item.hard .cli-score{color:#b91c1c;}
+.cert-score-block{display:flex;justify-content:center;align-items:center;gap:28px;background:#f8faff;border:1px solid var(--border);border-radius:12px;padding:14px 30px;margin:14px auto 20px;width:fit-content;}
+.cert-score-item{text-align:center;}
+.cert-score-item .csn{font-size:1.5rem;font-weight:800;color:var(--sky);}
+.cert-score-item .csl{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;font-family:'Inter',sans-serif;}
+.cert-grade{display:inline-block;background:var(--navy);color:var(--accent);font-size:.78rem;font-weight:700;padding:5px 16px;border-radius:20px;letter-spacing:2px;text-transform:uppercase;margin-bottom:18px;font-family:'Inter',sans-serif;}
+.cert-footer{display:flex;justify-content:space-between;align-items:flex-end;margin-top:28px;flex-wrap:wrap;gap:14px;}
+.cert-sign-block{display:flex;align-items:flex-end;gap:16px;}
+.cert-college-logo-small{height:50px;object-fit:contain;flex-shrink:0;margin-bottom:6px;}
+.cert-sign{text-align:center;}
+.cert-sign-img{height:1cm;object-fit:contain;display:block;margin:0 auto 4px;}
+.cert-sign-line{width:170px;border-top:2px solid var(--navy);padding-top:6px;margin:0 auto;}
+.cert-sign-name{font-size:.8rem;color:var(--navy);font-weight:700;font-family:'Inter',sans-serif;}
+.cert-sign-role{font-size:.7rem;color:var(--muted);font-family:'Inter',sans-serif;}
+.cert-seal{width:76px;height:76px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;flex-direction:column;color:var(--accent);font-size:.52rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-align:center;font-family:'Inter',sans-serif;line-height:1.4;}
+.cert-id{font-size:.7rem;color:#94a3b8;font-family:'JetBrains Mono',monospace;margin-top:5px;font-style:italic;text-align:center;}
+
+/* CERT PREFILL SCORES (registration step) */
+.cert-prefill-scores{display:flex;justify-content:center;gap:10px;margin-bottom:20px;flex-wrap:wrap;}
+.cps-item{background:#f8faff;border:1px solid var(--border);border-radius:10px;padding:8px 14px;text-align:center;min-width:90px;}
+.cps-item .cps-lvl{font-size:.66rem;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;}
+.cps-item .cps-pct{font-size:1rem;font-weight:800;color:var(--navy);}
+
+@media(max-width:640px){
+  nav{padding:10px 16px;flex-wrap:wrap;gap:8px 10px;}
+  .nav-logo-badge{width:42px;height:42px;border-radius:9px;}
+  .nav-logo-badge span{font-size:1rem;}
+  .nav-logo-main{font-size:1rem;}
+  .nav-college-logo{height:30px;margin-left:4px;padding-left:8px;}
+  .nav-links{gap:4px;}
+  .nav-links a{padding:5px 10px;font-size:.72rem;}
+  .hero{height:auto;min-height:auto;max-height:none;overflow-x:visible;padding:10px 0;}
+  .hero-content{flex-wrap:wrap;padding:0 16px;gap:10px;justify-content:center;}
+  .hero-title{font-size:1rem;}
+  .instructor-pill{padding:3px 10px 3px 3px;gap:6px;}
+  .inst-photo{width:28px;height:28px;}
+  .inst-name{font-size:.7rem;}
+  .inst-role{display:none;}
+  .form-row{grid-template-columns:1fr;}
+  #certificate{padding:28px 22px;}
+  .cert-title-main{font-size:1.5rem;}.cert-name{font-size:1.3rem;}
+  .cert-footer{flex-direction:column;align-items:center;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="nav-logo-badge"><span>DF</span></div>
+    <div class="nav-logo-text">
+      <span class="nav-logo-main">Aptitude Mastery Program</span>
+    </div>
+  </div>
+  <div class="nav-links">
+    <a href="#" class="active" onclick="showPage('study',this)">📖 Study</a>
+    <a href="#" onclick="showPage('operations',this)">➗ Operations</a>
+    <a href="#" onclick="showPage('conversion',this)">🔁 Conversion</a>
+    <a href="#" onclick="showPage('mcq',this)">✏️ MCQ Test</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-content">
+    <h1 class="hero-title">Decimal <span>Fractions</span></h1>
+    <div class="instructor-pill">
+        <img class="inst-photo" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAYGBgYHBgcICAcKCwoLCg8ODAwODxYQERAREBYiFRkVFRkVIh4kHhweJB42KiYmKjY+NDI0PkxERExfWl98fKcBBgYGBgcGBwgIBwoLCgsKDw4MDA4PFhAREBEQFiIVGRUVGRUiHiQeHB4kHjYqJiYqNj40MjQ+TERETF9aX3x8p//CABEIAZABLAMBIgACEQEDEQH/xAAxAAACAwEBAAAAAAAAAAAAAAAAAQIDBAUGAQEBAQEBAQAAAAAAAAAAAAAAAQIDBAX/2gAMAwEAAhADEAAAAtQP3/NQMAJRpgAAAADTxS7HxqOfX0B5uE16c83q1ntKi/fIAsYmAAAAAAAhoi06AIAYAAAAAUU8bn2vqi+HpnFE0oiFFxQ6XNN49VPz3f8AR5JA7kEDAExDQAAITAAGgaAYAY9PmefVETz+uyVM5bEBGMoBGcSKCyXZ4t3Xn6h12d/GmAAAmgAAAQAAUA4QwQM5fH14/N7ADn0Gmtkq7AVkpc8LYWVqSCUbNZ6nW816X0eVgb5AAJoABoZEGIYAAAADPOZNObye4tOry7U26LeXfBb0LrnJDfFePh9FTZ5qPcx754LJw6c5+l4Hf9HkaZ04pgAACBiBAwGhMABgAeex76vJ79OmEfN69N2BR158nVZtWS5ZVYqk254RXFV0+b147+xy+r7PngLfNiYIABiAABWBCGWAARlmxvlO2Pj+lor1ZuPauUqOnNXa8uddCiVHPeY1UduLUqZvRk6OGyzscnq+vwNB28wAAAAAADTUAgAoaIK7Sa5ULI/P+tqsho49M5tnrOKjTStlWuEtRDfrOGe2qXNh6GHeLduXV7fnyQdvMwAAAAAAaagEAMAAAMmTpczxfS0acVnn9W5ZJIs2tFcNVVlWhWS3RoWbGpnbnfdCf0PlMT1zGmAAAACGDEMEwVoBgQYN+XHXLKE/n/VeToiYL5XU6N2asivshxnDGq7s2z2eKwT9fhYmjAlAEYAAA0KwAAgB0AQQmjlyuq8P1J2Uz49rYStlyS3VazSnVKVi1Hspu+h8tifTi3FknFjE4GgYgYmAAwFAAaIaEV5ejyfP7LCuPm9emWNZ1reNGqmo1LVF6ztkj6PyJCY2gk4sbQMQMHCYKAIwcqGyJvu59cGzQcu+fzPq/L8u9ddz59cy1RXOXhTZYyKmrL5U2dvLOfaz+jzc16su+Y09ZGmA0NogaatWdPn0wz3nLvld5jZJSzoaZHznpeDneAlLn3iXWxjNkZcy0RKVZOxXQuk7gz0eZU3lnOx9yHXlxHtxd/OxGsMTCU93PrLQpeX1ialQpEJoHJA+T1sudcN3HD0wdgtZYRWrSqS2RTaWMdhM9PmBhGM4JFOVYMXcz9uHLYd/N17abvF9CQ1KJxIqSsk4zlBgAHKz9KGOmE1ZeXZDWdDTpuRrBj6524bUO5ABRnAYSKxwsy4ezze/C7fCfDvJNSiaIthGakAAAGDRfXYSZLysXR89qdG6e/rzK8Kl69ubTy2wJQAITiRnW7J0yBNMcqbpZJoIxmDhMGmAAABCcSu3FsMfn/W1nH7Fc9ZpqVG89O3Jfz3aBKABECKmqUZwRqVRK7JrHFqWq2uwjOuwABgAAABRZkjvOoV+NVxuildtF1OFYaAJQAi0CEDcZiptjZXdFkhOWE0yDaqQyBoGAABXi6NG83LPiTpTz351VOWeWNg9Z0AZ0AEGIcZRFZWWWRZLXJMJQmNSgShZAkAAmMAAApuEyQrr64j1uX1DmSlztS3uc/bz3YBjQnAlGUBwnCxpxLEhY28bs3NVkJZ1NJkojAATTGAAAAHA5nsePqVd3m7jJetBTfj2ZrACE6yUU7CIwiwlGcV4faw39MaU48tznCRXdVMGMi0xgAAAAZdVY81ltmXP0KrJXlebaJqouJXYiyEqrQEyaCXz2rpcX0cu/VJcOtsSMTUolgAADAAAAAovCm1hWp0GHTJdMbQOe1XMIxnEAKiwSQhaFNQ7OT0dSyULM1SjIU4TAESACE0MTBNGXXh07y6uffrNuym7lthFarITpDUVzqnYNAwmf//EAAL/2gAMAwEAAgADAAAAIYeTqgksl5t4FlmiQYQZnHmghggDSLORfejwZn/mvrngnmHltsmNK4QUnvglOsuiK8IT+VjTwQRvmu8ggmn82H0fVUF0YADTulZuQcyy3+ciR+xSXOvnL+Re5W6Su13EjXfffPqP/L8opp/bvnK83x/tvqN+qwnLParWr9Gu661r2cYEAoeYWcGUjEGcskrpAPuAx1ZTp3cv2vrX7ii/RPLjiJk03LCXrjYTG4Les+ZOn/DAQQbY2adT/HoKghttGbmuSZvvNAWJFGqrpFonMvCD2MM7j89lIoVsAMDdvOE2AJmvQJlBDkgAJfElbDQAFCUa3gFgiAABCGpzIgAHoHZyWNqkAAAOgBzfgABjorTVpnMrAAAO5UNwALmlerspAvHAAE53U/AFMoRaI+vDNPAAALmEJAEHeXfJmgJOPAAAFGe3yLtv3SsnBrlFAAAEMPPgMutFQPpEpsrAFCFLPrxNOj40f//EAAL/2gAMAwEAAgADAAAAEP19rwhiUE8LFriZ2UwoYMsguviMnNGpBknCoXKT67X8afWnbFt5iZijbTa4O8bz07/KWUlfEtnfWUMiQcTj/e2Hk4NE9/6iXQuavZPafAm9Hkxmu2YLGsuV+cTNQl+BLEqxv7QbgDsJI18vIQ4LHEEfYYnMyQ6/CUdlqtKQ0FMVEs/HBy6A9eULFzFVvxQfOEwBkSQGvYEcGHSaodWe8AL23R9EBx0xlLnLOds06p/bGZ57qswR5rvIok5frrDlGUzlmunRhrNXGhAtljv1I/SjahvyuJwmmO+OrFxa7L7FvAMGYC6rtsPPLWoZWcfPLgXnJOnKIvPLP3saVPPHDKzUvroPtPPBPj2N/PJPmHv6HtHJvPGSpC4vPPJjWqrDsCrtNOeQ8H/LhvYyGFBvjvvHPKegA/Kq/wBfTIJKZKryzyrZmNTz8qO7QhTrpryjzzw8/wAwSIj4DuKsIGS68cTovW4ixxr/AP/EADURAAEEAAQEBQMCBAcAAAAAAAEAAgMRBBASIQUgMUETMlFhcSIwgZGhBhQjchVCU2KCscH/2gAIAQIBAT8A6cpykljjFvcAn8ThHlBcv8VH+j+6j4lC7ZwLUx7Xi2uBGR5QjzYviAiJZHu7uewUkr5HanOJOYKw87onAh1KGdkzbHXuOYc2PxJiYGtP1O/YInlBWCn8N4snSdijmPsY55fiH+xofhFWtQRkaO6DrQKDqWBmMsG/UGvtFYk/15f7isTiPDFDqjipy69ZXjyEeZB5vqUMU9vuosY1/ak03S4a2sOT6uPPfJj3aJZz/uKlD3kkpuGc7o5p/KMTo2jU1HRQX8u5wvYD3KbC5rtntKw0l/SevZYEVhYvyf3+zaxkxgw00vdrTXyjiHzxyOebN9Ux4e4hxUUWH97WJaA3YkJp1aADuDuo42ULKfFCLIcdlhH63k+i4LiXzwyA9GOAH55jyTxCaGSI9HtI/VYcECcEdgU4kPUbpOooKSy6y69kGkU736prnNADXKQv6lYF1sl/sK4DCI+Hh3d7yT+NualvkLyxMBgx2Kbppp3b8HdTMOo0mF1bharNOYCtEY30o7g7UnklYGNwhkoEk7ClgojDg4Iy2i2MWPQ9+a86y4hF4uEk23AsKRpDyEyRrWk0ChJGegAReKG4RfCTVJ7Rey/hqA3JIeza/X7V5UCCD0K4jhTFM9tdCnNLfhRk3spHHT0CG52G6jhJcLC4ZAIMIwVu76igFXJXMFxox+MyiCdNOCcwFGBlrwGEhRxtZ0CjO4A6lNaGtaB2FLpkVSrMZWACSaHqpOKYdoOlrnH9FPj55gGkgC7puymP0oyEITBeIPVGUKN9OBWD4/NBKYZf6jDuwnzD2tM4vhnAag5p/UKKeOZuqN4IyvbMrFY6PDkNLS5xF0jxPFEeZo+Go4mc3/Vf+SUcpzUd+6c6kS0qx6oPaF4lJjrxMRPqMmSPjcHMcQfUKDis7b108e+ygxEU7QWO37t7hVlisdFCx1Oa5/QNvv7qWR8j3PebJO55Cp26onj2tOvKzkFGLxDfwryCDyN7WD4o4EMnNt7P7j5ym0iWTTenUa+MgEEc8RgtY1M+knej0Kkikj8zCM48NM/ow/J2XDcLh4JTJNT3/wCW/I33qjeYVlAWFw3F7eDI4ChbSf8ApTyeLNLJVBziQPQZ2jmZHGNjCbDSdI9LyhZgLDn4ON1CjtV/kISYfDxyOZw6Ex2ADpAF/NbqTD4Rj5dNuN22j9IB3pP0h503WYVAgICkfMiKOQ6I8zXEJ0xk0ggCgpWHU1zj9JFNHwpWkPJNfjMdECrQ3Oylbple2qpxFZHyhHlbgZHwNlYQ4aS529UBk15aHV3FfvafJI/zPJ+SvAlDNbmFrSLDiKB+M+wyPRN6Wnue57y+9RJu/XI+RHy8uFn8MSNF25pFjvfYrDYMSyDxnmNjm6g6rvetlJHocavTex9Rl/NSuw3guf8AS3yit+vIFV2gjdm+t5dkOnK1xabCgiL42RvcBqdTCb27kijS4rK18rNMwkAbV1RFIEysgga9jmtbYc5uxo9B/wCrFyxv0hsYDm3qIFXkEB1TUFW6xOGkgeA/exd9vsicOYxpFaR+vusQQ6WgbIaAT6kKWR5jjic6wy9I7C90ch3QFNXQZBYoGSGPwmgxtH/L6fUZlHlCa6gQALPdCdml4MQt3vQCDXOJoXQJyHoj0pEbZtxeGxjIYpnvYWMOp+2/t8I5dvsnFtkwjI/BAcxtaxkNgrs50gpImtaxzXh15nMZ4tpfWJLw4ykuIHY9wpOGgFgZO0gj6nHYBPDQ4hrrAOx6XkaoBBVtldL/xAA0EQACAQMCBQIDBwMFAAAAAAABAgADBBESIQUQIDFBE1EiMGEGFEJxgZGhIzJyFVRiorH/2gAIAQMBAT8A78hzHKlRqVWxTQsZS4Lcvu7Iv8z/AEI/7j/rKvBrlN0ZX/gyoj020upU+x5DpMHVYcKauBUq5VD2HlpSoUqShUQAew5kS4tqVZCroDLu0e2qY3KnsfkDo4XZivULuPgTx7mAdJEvbb16LKMau4hBBnmGE45CETPMTh1IU7WkPcaj+sEwYFMWhUP4TGXEIhXecWorSrgr+IZ57Y6jBLUf0KP+C/8AktLT1Tlu0FpQC49MT0KanOmYjWtN/GJV4eyAlWzGGDgzjT5uUX2TqwYRz8ThyepQtl90WU/TpIABHugvdG/PEWutRvhYT4h5EN0AcYJP0E9YEbowH1EvaGlta9j3nFTm9qfTA/jp3gh7QzTOH233q9tqHh6gB/LuYlrTt7iiiLpXT28CEYXIG8rVbvI+FcZ8S2JZt1E0YLEjbG0q1aisdKSjVrkANTABl6uKJAn2ls6dvXoMoOqohLfXHLboHRa1jb3NCsDujq37GVsF6BHuwigaZUFPsQTKeAuAuIXGSud8ZxHUE5K5iBT2l2u6D3YT7UVzV4mU8Uqaj9/ih6QRMiYhxieJw26NzY2r6skKFP8AkuxlMjAjKM5hG2zGBnPmA485iAS+fDJuB53nEq4r391VByGqHB9wNhDzHICGbwn35cGrmhxClvs2VMRsqDHVnIGoiBGGxZjFTc94RVG+qIxxPtdcAUaVEHdnyfyXmZnljkeWOQZlYMpwQcgzhd6te3puD3EDZjDbeKBnuYY9UKs45dfeb999k+AQnEBmeR5Z3megz7Oer6FUEELryhiMdsmCs09ZhmO5buf0jgkZPYSo5ao7H8TE/vMZ55xCeZ5YJIAGSTgCUuDXLEa2RR+5ltw62oNqUEtjGW3ln/eYqKwno4npH2gpSqvwkCX32atrj+pSPpP5AGVP1xG4LcpkKyOP2MrW9Wi2mqhB/g8sbwiZxBLPh9W6BYMFQHGe5i8Isx+Fj+bGC1txjFFNu2FHOy3rY/4mBYNYgJ9phjCkqrim+O5U4/bk9NKilXUMD4IzK/B7Z8Gnmmc+NxLi1r27EOpx4cdjCRmZlpw+tXqJlWVDuWI8fSUqSUqaogwoG3TauEuKZPbOD+sXHQcSq2x+inmYVB2l9whWBqW64byng/lCCJR1elT1Y1aRnHv12vEDT+Cp8Sjz5EpV6VX+xwfp551bugneoPyG8u7yrVDLTyqnv7ke3RiEzitl8Qr00JycOAM/rKalUUE5ON+sKoYtjc955BhrcRVjou20nwSTiVBdXFddd7U99OomJWrOq5+HwffaJnAz1ePkmHeaAuTnvKDLoZQNwdz53lIgrtn9etDlFOc5HLz1G5VapRgRuAD755MobGfBi01TsoE9VCxUMCQcEA7jqPeLp0jT2xt8itT1lCcYVgZWuNCnQutgcEZ7bZ3iNqUds+foZ3noU1qmoF+I9+sYwMfIIzKr6XZ1BOFy0skKo+aekkwLparVIYMTggHcfWUabpqyxIPYdB50ayVQSu2PHyQmCTmIMA/UkgREAd3C4LYz+nR56KJC1G1k6if039vlEZIOZ6TalIqHAhYDGfJxzEHfn93rW7VXpKraiML7QfLFuyV2qa8hjnT8hHYswZCuPk0SFzS0kBAAD7iU7/UXDUmyOwG5MUkqMjB9uv8A/8QAQBAAAQMBBgMFBQYDBwUAAAAAAQACAxEEEBIhMUETIFEiMkBhcQUwQoGhFCNSYnKRM4KxFSQ0Q9Hh8FCSssHx/9oACAEBAAE/AvA0N9D0/wCgy2+zR5Al5/Kne0LQ7uAM+qMkztZn/ujX8RVPMoSys7sr/wB0z2lK3+IA/wChUFqgn7js/wAJ18bPPHAKv1OjdyprRNPk40b+EIADQX4lVVuyVnt8jcpO236hNe17Q5pqPFWq1iHstzf/AOKLi5xJzJ3VVms7vnceSy2ngvqe58Sa5rgC01B0PiLXauA2jf4h+l1VW6vn7gFez5cnNIy8O9wYxzzo0VT3ue9z3auN9UHrK4qlx5IpHMORTD2QfDe05aNZF1zPMKclOXdWGahwdfDW9xNrf+UAcwuDHdFwzqjkjyMFVDlNF+rw1u/xk17Iy5MsjadpGwspk53ovsMpyA/dMsDh8QQsw3zRszSn2I7FSWd7UWm9iiBM0dNQ7w1s/wAXN63MbUqNtLmlM9byinJ8beifEizMrRWIYrY308Nb6fa3+gWpUMWAZ63Bqa1MaqX4UWotT2q0NIo5d4L2d/Gd+nw3tEf3o/pCsrauJ6XcR3dYP5lWUdSja52atTfaX5VHbGP6hTG0F8PCcMIPbT56VyTre4aMX2q0OOSraadohcRze/3eqc0OFDonM4T8K9nDOX5eFc4NaXHZWvE93Fyoeiso7LvVUyqqhq+0tBX2ljmVxUGmbTRHLMtaR1bmosB0TFNoi7YDRNmEes0Y+S+1NP4SsTSmhWod1WB+BzsQyd4W1n7r1KwFjJAO7TRWf+GPVU7NFJEM1A6OOKWIsyfvuhFO5mAydiuY2UrIpCOHE6NwbTHX+oWHM5jXUZJjj1U2ZUcbAWPlZxG7BunzCeJmzymHuuPT6JnBZY+FI3E8mv6VDD+ZYKBWn/L9UGffR+XhZW4mFf5T/Wih7jU1YAUWBNadgjHl2iqBMaFK1MjY4dD1Ton9arh+n7LhhFuSm70f61GKzH8vhmOwmUeYITExNQaFQKaQVAGqppr5qNpJU7aVQLo6HZMc1wWEI6lOT++z9Ss2Yc78Rr4YQcS1hmmpr5LQkdCmlAoOTnVUrCaFuoRltIPaY2iZaW7mh6FSWg/DomcWXvAAdE0FjvIrEiU8qOF8zpMGrWVp1UP8Pw3EdC/iBtainohprVBBy4i4ixgrEFhB1YnADZNcFWqxIuTlBK+KYOb0zHVNFB9fDztwyGm+aF2E0qqS60qm4z+EJrX/AIa+ia0U3BTya5McjI4HuFCUbVVK5opyg7lfEWoZNd0QuackWjZYWeij7PxBcQ+SkBd0Qjb6rAN1XK55TRRoHiHtxNcL2m6gK4DV9mXCpuqUVUSqqMYn+KmZR9et4KCaKqjeqcKIlE3wjs16+KmFYz5ZoEFEKvW7F5rGsSLvNF1zjkhk1o8vFRxmQnpTMqlK+qxFY1iWI9VU9VXzVVW8+I+zzU0CbCxraAepUlcBprTJCtM9d0QiFRUKoVRUQaqIqM4hTf8Aqh2u7mh4MAuIA1KFljy1/wBU2NjXVDaZKlxGae3DJI3o430CwBYFgCoORgNaDcf0UlQ9r48i7C4fNSwRyd5vzX2GLtZny8lLZHsFWnH777LL1ahZHVzeKLgwjRlfVcCPpQoV05CraKWyXzobsKwlYD0WErCVhVPJUVFHlIxRtrJYh1p9OSSCOTvDPqjYekn7ose12EtNfcxMxyBv7pkbG91oF1FRbgrfl9oN/vX8gVEEOSioqIBbj1Tew6yHpT+vMa5Cqms1SXR/NqIc09oU5gCSABUlQxcNvmdTyVRTtAeX2iz7yN/UUWFUQHJRYVhWFFuieM4f5Fut+XCsNctVJZN4/wDt5GwyuFQ1WeHA2p7x1Q5tRdtfa2YoHZZjO6nPRUVK4vT+qJHGYduILt7yjoiqXWiDiCo7yz3us5xRNPK7RbKibvzTxhr8h8vdAta0vJoAalMkdPMGRnDg7Ti7y5St7qI6FbK0Q4u2NR9RdZi3AWj4TQ+q35M1sim780+bgzH2j3WpsNRRwy+oTrJKNMx9UcjQ5Hpy8OWleGUBlUuoo7LC7hPfH2md1WuzvmY8YgB5DMoaD3DtFW6aF4kOAZHNezWEWbGdZHuf+63vNwFw15vaEBlhaQKlrwfOm9Fx2YA/MDqU1+Lb57IsYa9kJwY4ngg/PT5KY2qGmJrc99lA6SbECP5k2S0R5Rn6VTbUwQtfMQwoWhkrncKPMblRzNkJFe0NQUecoFHRFBFR4Q3CPhy9wOcNa2vnf7Qm+zQl4ze8hra6BC1Wxjg7jF/k7QqyWhuGWeY4YnU4TSoZRJHoM3OGXl1X2Z/DeCN+y1CzAGr34XU7yis7GuEudcPy9w7a8pqKYKYvM15Dp7t9NVxBUZrZW6HjxcMjzafzBf2bb9MH+nqoYJGcNpwzRs7pDcwshTL/AJ5oRh7iXafCpbUIpeGM6DTckqIOpV1anbmNzkFRBMObkVE9zi+rKUdQefJMaM9TcK+5e1xaaaqLvIetUdEHYcy5R4C40y8lJq3XI50/9qWQxirQKDZGCR5xSOLsu+Mx8uija/htFcVNCUwg4ajCaacrtOXZUoiVDJxGB1CNeSX4VtcNPcmmJ+EdrKqBCe40PZ7PVPj7LQOqEdCmt+8l17wI/ZcCOtS2pVKXYWh9fLldtdtcUBoiqKxvx2WJ3UXBbp/e+SGlw9za+I18ZjFcXZ+aZasUojaBgANXfpRD3OFNLydFxsh1TTUKS0wxvwvdQ0qmkumxDNmD68p73KE+6CNscLWtJIGlUELpO8m6IhM09zMHGM4aYhmKoRh1o4jXZ0OuxQ0Rc0akBOlYKZ1qmnEM07C9tdFG2nxVCtNl4rmvaQHDroVBGWF9cPy5dyjcbmo3MILQRoVuU3e56j0RTd/dObGH48LQ4A9r/VPmDLRG01zb8laIC+WQk1zoPIJn3bQ0kVA2QIdoqNDaGiq/H2a5JshwuD3Uzy6qCziEydtzsTq58xuNwOt7AQwA6jJboa3O0TUUNfdSMBrkDVtKHdTNL3ilDTbp51VJHkVa1oGkldVZ4SXkska/PM6GqAVticZampbT9k0zxMypnp5FOke04icVDmChyG7fkGpvZm1p6gIre8I8wublW8gEZqa2R1kiIdnVuKmmytHYiYx0jS7EBRQ2d3EY+pqEPiWBkco4jxnoFasRtL+urf8AZQCB7BLVpdvXYqN+MHLfkdcEb972a4dg3I+lxuGnut+T2lDKJS8Ndhpm7osIXshxE0jB3cNUVJZeK0F/Zpm7eqwte4mmdKhNbGNttwmBgGQy5PioigjfvfBN98XvJ7HZpvcUNE3dFA3nlPIQCCDoU72ZZw4Bs5aK6ar2bZnQslLx23PP7DRSvDMPapVwH+yhcZA4OBOfaO1egTqhpIFctFBK93ZLhl8XUqozQvbm55+SJ7SCK2uF9ntDrTK88PA6mF7a69M1Di4TcVKjI0RTNwtCEUMj7kXBFCPRF/ZJbn5dVEJKOc8YHOcKjX5ISOjqHEn1TTic1mJ2B23mmQtDaYfrc24poo1eaCcc7wjc6D7P27MGuqe1izy6KGZvF4eHCS3Fh6IpuqcgahOQNR7jfkkpgdU0UTT/ALhPNKZjX/lEWMOHFqnd/MpuiMn32D8tU24p+lzjhbVUN4RumYGOJBo7U7UXGYx8MznUe6MA4kbtk3VOTUdOfpyTsqWKJuGqc2tNFgP7aLrjGStmOOYUeWtIypooTiczFhcRoeTtFx6LdOOaCNw1vks8UjsZYC5TwYpST8RH/wATO7TpkimaIrW4e+LgMk7E91FWho/ToVBIZZCQzCxuX817jQJoo2hWguF41vkkMZbnUVXEZi7DNTVA0cPNFN73qih0RTenIb9Hjz5NQrFHw4MJ/EbiGlwzzponOLXBSRyyEdqmevkgABQXvzcAgU7M3Era4XujrSqPcoa9PNSsn4JLe25unyUUrZomSD4h9fdC5wq3ltAe2RsgJppTYKLJg+a4XbcXjtVT3TuaGtBrTN3VQx8NgbiJ6k3lNGpN5W92y2v/AP/EACoQAQACAgEEAQMEAwEBAAAAAAEAESExQRBRYXEgQIGRMKGxwdHh8PFQ/9oACAEBAAE/IfobNDKTcBdU/eIbX/wC2IPaPT8zVN6tL/7UpLTP5Yo4q1GLH22Jjhe8eAfV+tEcmr/4qftD8+/eEYCZ4i1tj7fePtLHMu+IifPDK+8Of+rhAW5P1j9RZr5e3t5iRu0tsOO5W+pS7xJULUtXS4YZRgqwD+ftAKmwc9X6XMYnjx7v9Ru8qrlXl6DsxNVlZkwxtlMYnS4wxsUGR46v0nLqH+JyoR/xL6FInYgtjcD3ZaVXQ9CaSi5iLqybNfTUF/jmuty+mK9TbQ4lbm4v/UQj1OUEW+R2e5+o/pEz0TZjqEGYeJQu0wWIWEROtion0pHb9L+4P46EUnLrlF/ME1GHehFbVgDNUvMJBDTUJtLv8wHErod1uBwwF9E3n6Qmtd1/XpVQiYgnRW9s/iD1MlM43FaMB7B4geAlr/P4YiQwWfptR/sqAgBbKRgRXcU1FplyeIkeq9mJWGCDS9oAX6ap50IK/DHRuyXlaJxLIkfgqMbjYHsisLAOJQ/BLw/NNVM8BGh+0yTGAq+8iU7UZbWOmWv2/WEYfHQILlAzR5Shpawp9o1XPbmZbYcsj7qCjcNKUg96C8naVUPqAlBOTgPbLL0Vl/aVQuzXF/mulo9EzP3HthSD5PpVKnYiK7B9PJD9xMA2ajeUGEgnb/1Fp+AcjvXeO4iFZdc8kqLZwCj6IMNMSym7jsN1Kn9hMK6m02jm19oXmdrxfzExl7ZTEwX+H8yzuvHol5+kofbMFu3lBo3tBc7SH1X8z/SQlbcHaNmvUr5MwyXCvCgd0ELuuh5EA29k1PGH3Yb+k3Z3ICO6r+ZrFARHETzqpSG3pgXa3d38QWBKg5l4e5MeftLjP47TW3XMZTKZ2gsvgnsZ+cPmfpV15lSpqeSBcch+JXntxPxzzxsLuKrDvafEpgx2/wAzWT1H4idB7mXsRzXn3LOQum+uglLV37IT+H4h9DfwWuR/eaZZs2Kq946qL06ZxDeZe4yRKUPayLmv2gKrcqIdGsMufW/Z8We/VR2v4n0RUlAp0U3Myl0RUfP3VR/5yd+HlLuzzOZgGnmCjK8TmAjpOYIHdNunFdz8T6O3vFP36L6XZhZzlK8v3iXmVnsiTaDtdzlQ4aX4mAqXzL8E8Vn1AO8kBPZ1ncSZIryxy/3B7KVnLpqlbejPS5cv6bEdfzlQaZZHNjid3KHXIws+5XglxlEh+lcv9byHBDJ2IA/tDWGDCLXuPlANxZqWTIh8AIfUKHM4QOQfxG0HCD7MqlGI4a6qXivQXK17Jt8j4n6hnBldBLA1XwupQgvJtjFfZTzGst/zczJ0XrC0OkATKLe11/T3MQ7NBuItOe3P0dZdlE2S63FIywx0VBqOo7uzfvfTDFo92U7w7kD46pHJqVrw5DL1XqmMzo6x0wzsu3X9sDKHJVJOU5Njs+B+heQ5Wj7xFhopyrc0PYUEpK3abl9mJDXTiyvdn7NQL6BtP5jN4p4p7fglOF989BeGz5Z2g/kR5lSpm/SYZ3PwCPKZ2LH1DMPn2L36T/bpKzEMQZjdDXJHA6HRJeHvKx0CEWVGGLQQgBF/wbPxJLUKHMwKFfA+SVJX5ly/hx9gQartr/qIHRiILGp9kqMNQ6I1sKvtPSBndlSpXQ9AymQ+f4io+n7kdp/TqwjDWoB2Zj0ve4+zMiiImx2ddf8AxeLln/UvEHRjq5Vw1uFL0rKGjpglqT9oA09ISjtKJRKlXK9A0u1D3JHYA/hrpz66TRLQFbjBxQTD38MoKCkwjx0t1t1+IwMdcIuy94WxxBQPPTiHVzjtzwvuT0/b43NyuhNlEfGAgnThXDzY6giDOfgdJQsYpdzDSMEe+f8AGZZOZVbD1PEvK2AGmJeoafQhOIa6652vi637iiF8MN7lhjxcQLsBtROhOa57Qs4puA/YHiCGNmXFu67wAtmtD3Yd/Y+DKysN9BlMCDmf1Ly+Iy2t+/4NJcam4kNQdDq8vDDQ7jvMkVcHbvL6DqhOa+0sSl7smuiphWHczUBoRfR8wale3B/7EK383tjTMZLvPiFwtK4ynk7y6ak0HPPqafFjEksJumU4zadoa/iQ31dTfwHQ6oIjMZ5229EsY9Z3IrW5j6m3N3xgEKjQ+9VtuZ1VQ5h2LvHcQLdut1LAuaYNstN8t0eY/F1HXSMEttgUhzNoFhEdGKlAwzjqdD4Aa/eGYGskFyh7O+vClAbWlvD2hNOUoHdoO4Vgrd3RRrcOFoFHInJKof8AD38zLYC1t1HYfHSYgt9S0vFg6Qi2FNX1Dv8AD7CHTI9up0PgReqYPZWGtjDWb+TCLtxEzaOAlys37JkRetsqsfkS6mCq7dyFBDcCwezCoEtowXXmKWRTyr5ndhiMM4Qz12iXADAop8NdCczOp5YaeovE0fom9dyMCv8AqYRVYvMIDZFIclx24e6GTEbChcaumobQNrmAABQaDoUAy/EcjpeUJpMxmJFXqXGAsoaG+OixOE1+I0epeWLH6OcRgOPKXtstacF9Rye49QKWZceY0xWs12IljAV04MQdRpvt8dB46GpqL06Qlw0u5S6jyx7nJAZeJmZunH5neGj511SAaKTPunDC/v4IUF7rMJszutQWmBZWcd41unEot2qjG8wjYLN4E2MNYXHx5pp0FTmUqHiVO5iEMS2jmAm2by5T9Jy8irQf4RkwN7f7idsI907RjeEVsHabR7KzEwKHeNz1A1BMsQtZcRAEZDugKDq9CcOihGvw61R7SFD5nP10OYLjG5n8E6HQb6qtuK0dgy2ff8KeHZ4hQuqC1vXaZTAzI25GVXf55gvSRTt6mjpUF3/6Sw2r3Pj38TohGHUXp+4g3GJ7gvyTDMvCM46dJVJ1Pg0PPVAAR4YYgQJsLunfzRrjdSrCNtuw8Y/iYPkzu+F0KrzL2ZNKftGh/oWOXHeGm5TPD5PHXnoNR2rNJzCG0tixpXkxyQ66NkViOH4MPhr4Nj5D5ZiFtb28sT5sK9m6jrMJelo7DbcoGlAVSYqyGbFUcH2ZjcdhDrs+Fx0Q0RQ6EOujZuBjy+38ssSzpdmLI+5HVMJOhOHx0+B9WFJ3GFGO0/C424Cb/EgicCYu1/ZfeUtyiFfyARKFGAj5nJaPMgcELDmz4HgPCYh1TEM2jrpV5ijMypDHdgVx0/2JdrzNI/u9DbHXQ6s0jFZLI1BvxzApLg0HbtE+cXmKr/mC4UwbH3jnZnLged0zu480PVw/qcuiq5U3zlmVVyzkzThqM2mnS5aqmsBoVqNF7/mGE6VR/EFiSpfzBmVDEp6nVht009BVEd4IFrwljLGLdMu/HlFaMsZ5irIq/VTTmVBtWwctM0voLA7xuvMNEB/+WwKr93OOm3Uzm9y5Dt4mZiHsl4sNe+lapjmFTO8GI6U7wXt1Ph3fDBvT/MfdhnBYN548ksbXTLz3mbB+3LFVnRqBAgGvKXuEemQxxqAa6n4k069Ed9Axly+Ia1xlM7wftmhmSL7Q8RYjxhlxvsywWR15NRWD36MPh3+aByeJgJafiDP7Us+0rN6wlPcfbr/Ue4gJmszes4zBR13TllkQ6bFOZn28zWWZVgw+/HTgoExgRtq+3RhNOt7WDX3IdUEHkqJkrNvvHTiD5MpGwbdJxKfPMDXhCWg6rwWWI7gqOCIRxol4QmizzKhuj7GoAZqjI0HtGZj7ieC3zEPKt9ciPDNzyTZHFM4+GGOhh3G4PQeIxu5l1s71Dl7VfvBXVvt5z/2JZO6EZ8L4jXp5F29VMmwwwXDUUcwcxgusrUKn/8QAKBABAAICAgICAgMAAwEBAAAAAQARITFBURBhIHGBkaGxwTDR8OHx/9oACAEBAAE/EHyeOYf8B4uoZCvouJGlHbibT9AYMoD6g+GOzweEuVB/4Lh4CXD4ngjDbRgLXQfa4IZU7Kw+3KL2Y/ksvTF3Rv4JjPt3bPcUEd2JUPt/YEcOlZIQB5KCfXDHDXPTHZ4H4Mv5ZhCc+KzDyR83UUhBbT7PUCWVdr+XuK0Lf7g5WD3BorfE4QePyjc+wMRoW7ImABtA2HCRGt1HG/xMCYhOek4YPgg5+b8l+DwQ8PipLl3yT/KXX9bL/wCghAAFDZhBkydMXkDOyOSXgDmcKOMkArwxoI6lCU7VDincWPIaA8EEPhz8TxXxPKwTvxvkf+aEkqDklNr7YmgcTIVOAxb0Ym5sZnRGl5/e0lFS32xw5bNQNdRjiO4ZQgnEcttn/a/OkPD4dVLX4EGX8Fl+VhzfbWvym/Merr6EVc93EV0yhT9jHKFtQaiFYXdRnEu/cC0L7uDyumBvRfplumGe43mF7DrGyMYgG2/wTwlwPPEd/K4eTxXm7+X/ABIlxYVg4I7hvTbiAkgptiwtn0ZqU6Yo1Mlzrlcab/EwZ+Y5TELgj6a+qGoAi4p5OPN+ap+InHivFeOIZgHM0BAfkuP8SsqmHsYDcVXcJBZbDYi/AXcGUBsqItddxCmriKzmNWpT6gdSx9cPuIV5twGLuHxS25XmoN+K8V5NeCFBeXfzCOP6geDcPgP4JXWT3UTV+bzFKxuS++miS5KCEgHKHdbtIGAHRh//ABF20eorVMDUdWqBbAJIE6stYoqZHMqPgfmYl/GvATYnNaB9dPGdFw2ANZYGrhIhEMnfD/E4eWCp1LNk9CYkC9o9dg/UQVAOhFMYYL7uNMboPuF9JX10kQtDUvxXwXznwTmPipUqE5GGwez3B4yNB2waQsv6nrKBSEoKY4i8WTbKxaMLBpc7RzEbrccx+42c/iGC2CUIUaergUNuDN5NfrJMw+K/GoQIwL8GfBGJ6UfXKhlcX2YXdS1GLX8XOWWlPsVSxyJK6Kr2RP8AfTKwQeBi5bIYwTTpvhICcCrs5PuKhWOFf2RtSJxdjrPyf6icVUCir3XEPYf/AMkTFd+FhpVmD5PySGDwEETwSpzK579Sz0ZdUKwETuGRrGDVxM0Jjg/I0OULoh1glr2KJVS1TP2mwgyVAXhsT13Ebe2Cqwy5pQNBzCAobQjKd6TTfYZii8Sv6BgK0COE/wAZWC10eiG8xAQkUeeIc/B/4SPxuJh0qGGcL5JClvcTm8RSbIr96+ojaoSneVdwNUhSP1neM9ZgRxQkNmkbbF25KLmZHIG4WDYWVzMX6PijCNlgfhUF6McU4SXkZwrhUcrBGT6qWDuTEXCWrhb10esEK+4suEYEr5GvD4r4GoW0J9RoRSntrE5yCsgAIvpj/cA/tLW7ugMQSrlMMKJbhAEsrvlig1i9welVuqVImMLmbg/wuVcZealJ8MptYXEe7ZUP5GJh8F+B8DfwJfl+NU7Qn7UBQopFgvKsDB3qOKsiIAqoNgAbZVIhs4OWOMSmmg6esNFaWt6nL5SDIFpdxAri5hNQDZY3+UqWaa9pSbiTkM7jIw4RKw6NIK+T5X4ISpXkTOfA0GXeyIF4rQiIBVU02qyKQFuFOoNAYinGEtbbb9QuL0cbtCfNBLZ6BKtP7yPtaSXoSdjn6lLcoN3S0dreZOmFQPJAD1NtMVBVYuiJV4WVCFF0OvAvi4a8LDw+Lgy4MuckKDL8mZApTKu7lTS2sZIZcG/uNNsCZDpClBGNXTomrL0mvqBVsMYVGORll922leoY9MRxHPZGtIY63BFKEAYNid0fUGX4DyYeGX5YMJcuV5H/AOnDAsAQMEdhM6mAHuZCbO1ocSGAmXBC1xTmIO/wkpBsU5FQTpdVP9m1WlpV0fUYGHJIVxlw+4Hksf0S/Ay3yuXL81Kh4qVKY6gvgjFHDL31CRJj79QwNFtWQhVtyRYhTklFoG6do1/FuCJXChDRvZyOozBH6YiRcSJFTGVGXBB67H7gwSDCDF/4zxUrwy5yldfZkiVOEpPqboJxMVeBjvhgjf6issPVwwLyEubZ1eNbxd7m88sFCCCD5PiS/JrxXwfAEFZoWcTMTsS/DMzAEKgDhHEXOYmla2hdiN2Oz1Cfk/4IiWS4QYMGHi/Jfgl+DwS/BGMV5w/g3A/ssnamMwThMrC9M/kTMvYxSVtXcv0JwzTzAtxUCKNiJS4X4IQhLl+K8cwqEuHnnyzCIIEZcWKpNW2sXSvqiBHcjuTYdevEXMw87lL3BupdHEdh/MFU6AgwYX4IoeLv4gzNeCHxVwVlZCsqJHsfZqG6KEFrKe1g2scXCgWS/DfT8xWMuo8fN9+2dRBLYQJDmTFToY+w1GJUiw39KiLFByig/TAEgQPB4PBiHglQlQ88/QGj2xQ/cdC/wl3Fyjie8DGGcv5Kj8Woe7o/hn8/3DipmmKljadbnITHMShUqz13LtERhbJvCXslgq5e0KNcK5jxeIn5As4YpwepXTkXuWjvVYffuCKLEoFJ0kqEYYnwPKC1gByqqEi05bZov5RkAC7MWLrLu0j9krcmj2fmYCKwwIM9DK41+2EDwjz2/pjGS+h/pOWvsyRvyp0wc1/UE6fsZowz+oCHH6kh11hYeakmTDpNrlcOmv70hi1+hf2kJYu2AOVyRAERGKL4JcIZJbClVzYf+5hhOwv9pn9YHSWdTKDEBs1tfdzH+bUeScyBLhICG8j6XwDeyVMUBEoiUlsMsi2IVO5WCGBf3G011/QiUCjvcNhAlQoXXdaNgcEYg8UaTt4Z1jyuH6dR8FsuEzNl9BtXgJeZqx616CUSoKgNxKTiZd4mZrOTwSLgH2NkRpdfgzrMQ0hYjN5aNV1HoQKGblVC1vRAn4K/akIsHiCVDhmAvqfTcRTpkbGCo+/KSpHtRqTp8VESXufruEdsi3U4zm9QlhJca7iVKwpQiNlzLX0TDyR1XEZt5kHCkSz2SnUrOI9H8RHmfawEdVStbcwfQQ2bMjd1f5HyLF4oBA3fcDPfAQ8BEywBtZ+y4wKl5hA3cDPl3ozsde7ZHHihCxfrpOZ2yiDUdkumOIMfQjXSnJjsomQnTAiZzQ8tDlpSUrVZtcS+ypkjXcH7luoXs46IA0QzrcVsrVBU+0sqrvRFzOg+4ANJZAy85EzPouHueWYGmEcQRqD1MPrx/wDqkHBMjMGRO6lLbSZA9w1CXpTRsOCuITDZr7gKpq5TxKUqH4g0dANB5YuxFVjkd2EWz35uPfEc7epAJE5IwXgLmK5egV/RKCcrwLrsNzKEvjk7QnTN35V9GMu95lxYOkQDYJhvycTaRYRgnW7hXG2AmquPwOEdtoKxPUMDWceL1ruWM1xC3dtktcSwfx48Tn5BWXbtaXBSYulbhhwraMOkcv8AtI1RWkFoFZhLnsIj+QIsKZZSf4IMIJYCfrN4Q86Kra/aEy6RdYNiIc1Qd2gdwcxcOU4ADDb5GsCb0xUR5gEyksFghWF3GKBZiyYHqp/FNb78OGf3kAGYgUcRwMHPyzQsdkfaTCXF+pXEqFmneT8wI99NLIOgFlaHYwLhcDLVkDwKos3IlrIrQ8BqLIqa8q6eIeAQiqEbPTWkjQ4wXSZptG01/PyqtauAK8Zi0OICCrcZB9zNeiPOLXMyOBTjwZtAW6n2DG6XKxAwytsfjXsWiml0ysiF+54qJoKvUt+UBtHEfSRJ+ejDdqF7Fqu+JGDLsVM1TSQl4GKeYuGA2kxJeWDPAFqHJD0g2Iytvx3QMMfmBZeR/cNErTKBVxTHAWWfgjJX7oW7aZOfDEEN/SA2zl+j+oE6vSGQjYUeDv4mBpmF0PqZDPeoPTbiC3OgsUAtYIN60BXNyuKi80eunsgrjUhJVmyYOJrUyRrn8O65lGnw9XoYhTqIYPHsMyGUriutmzr4oPskNEpsPqZk4iwnqAyM3X5l8Oy37ZZbgtQO03Pp4hzFgjNltCh2BM17MUamA8ByQ8HxALpBVOwL2CDATV6K3HVHVLRumWUoBW6lMArgmRIKEFK0bh0bnG17wwKxKBQE9MBpuCqvxzE23CDfYx3vfPgCkFAsSixSYyQ5+NyLQS3xFr2szLRT+2FCu6pcTIko4llQdReIufizBdbgLInjEMV/XLUjwSCdqm2yzkOq15dYmoO10e5ZTmTGei/bOQvc21pLa2mUjHsoex5lfXxY9C0XD9QtBhlLqlXPRLV+4kAgtrLdmxb6iI9VLD0Wf3wdHQjtSq5tYs+kpn2JbxcfFQ+lThYB4a/ChBl0JAOmDDV81PR+kP5iMCpcT7DiWwFcBCnimNm1jZXHuU07oKmHKgLt6YesFmmvYdfDiYehgjpwCq8AzGYsJKZlTEQgQwdMNj0RfsnGImOWqdwNyO4wNMTIysQ+dC0AYE30Ufrp3U88gibVWOOIipW1BNpEAGukupkXSOo1piLAfiFYUwzSTIhiGTil8gS4AP6A+BwQHBvLM0e/BQ4uVsdoLWY7jeM3ADxDVzUDqOEFSYBe6uG1saetM4nHg6ZkHgAJ5Or0KO4o4l95mm499BtDcvVXeW6jnY5h73AgqHMs6Y16FwOyo5jbpGeD39o0s+wHS6HkcS30RSd6fTpNLpB4qq9eXKEFbiKuK/qR0mXflg3HSVUMI24vf592LDYjFIqzHKJgw3AVHcI8+ByTTxQdC87wqBZFxyisNBwLawpB8DFKpJtmOgjFri41BTUgKvbUE99CBRaqzR7gwFr2YRcf05JjPBxjUjjfmcjXKNPKbU58swDuYEeCex2asTK/RMJhMA3MriCrEcckVkhtEbhHUWh7ICTqZFTZECE3m0IYX34KR4fB4Z+1hV6QmBV2mfYrB2OvRUU1Y0HtcBF3ARMVZPRQHEGOBCEYV6SCrt40Uf2NygF2waIbXytFsblr7xAqn8ELS9sWHNnpmfcpVBQqOD+7QAQRMJpGClnuBAOL/A7hGCOnTSRI7JXKEPJoPvw4R8ErZdkBSMrdYyNOjIg+HgtD1lkoHM/w4FyVzH5W06tx7Ykm00TvTFzdCC6I6vgjZjJxM78MSlAInohPTLgLqJFuGk5fAWvFUtXh7I1aFCtAKMsC10SoK8RU+6n5lVzGD+YLZHIXApmyGg4uyZQTbyLEuNqMFjKBgDVKIMqRjZfY23FnnxBRoLHfqLwgKX/Eq6iOWSvOW5zrQg9THLtStkHaylhbVcLYjN8CFwCxgim35swr5M1euI0sR4lgHG/uFPaLPlCbG+2M3PQNLDPPPyrEn0lG4D8jie0tfc76qvsR4/Wb9kua5+RUXMQ7yeCk9+MEyFtn7Q4haMeAXqPVoyxPOjmU43ANKZycpFYRhByHAE9iSiUvxlof1FujH7mH4NwSNkC9EoyQmU0d6oLfalvZgp95dtwqY9QhU6SU54HOEpUPJn4v08DDPqrMBJ0RmfZLJZTWZ9k06ERIR38CWMTwMI/a39WkHorLri+5YNxlC1hj2QyfWE1bcZEoAuqehi3Tewo5IqdRDTVlWkgoIrY8v4JQBoKrntjmaC4zQMcvczBKQKZ/G8X6gWwA6eFRGqollWF6IThAFd6VBbWnEVQzBgm7iAKYSycGkt+ziCZoQ+QZB1OPGn7iGLDHlxW6hlrt9QkCFs4XpuUb9yN1Xtg7kyivYHXD7jAZa0l6t21LTAydsFq9v/gjlH7Qkb3AvLHbArS1lTtzLK1hwA4TuCA8RVElS05hkz5dwCjYio8C/wAkujLcDJBcv5/7huGyoufBTS9MGzxW9S8/ceTAysRHphfY9S4uUv1LjFggoSDdeKlH1+O5nJQ5A8pfl7hmUFH/AGzbFouIc/7uJjwe2JdU9vtghOPEgHsS4sLMbm24JTaVjMNA9Qhi+p98LhJjNdywyACu6RFQDBvs/qCkHSMcBmSthMQaS4ZYhIZJplCUxrtGYUwi+yWU9njMrZED6YKmzy8M+0MWCAMmU5Ye9MW7CrfByorwn6RhYAbYxN+604L4JeKhDB6JUdkv8dRXrbMcuYwShQURcVbmCZkAgADP/9k=" alt="Mrs. Indhumathi T">
+        <div class="inst-details">
+          <span class="inst-label">Course Instructor</span>
+          <span class="inst-name">Mrs. Indhumathi T</span>
+          <span class="inst-role">Research Scholar &nbsp;·&nbsp; Dept. of Mathematics &nbsp;·&nbsp; SCSVMV</span>
+        </div>
+      </div>
+  </div>
+</div>
+
+<!-- ══════ STUDY PAGE ══════ -->
+<div id="page-study" class="page active">
+<div class="container">
+
+  <div class="study-section">
+    <div class="section-header open" onclick="toggleSection(this)">
+      <div class="section-icon" style="background:#dbeafe;">🔢</div>
+      <h2>What Are Decimal Fractions?</h2><span class="toggle">▼</span>
+    </div>
+    <div class="section-body open">
+      <div class="def-box"><div class="def-title">Decimal <span>Definition</span></div><p>A way to represent parts of a whole using the base-ten system — a whole number part followed by a decimal point and digits representing a fraction of one.</p><div class="notation">0.5 = half &nbsp;|&nbsp; 0.75 = three-fourths</div></div>
+      <div class="def-box green"><div class="def-title">Fraction <span>Definition</span></div><p>A way to represent a part of a whole using a numerator (top) and denominator (bottom).</p><div class="notation">1/2 = one out of two equal parts</div></div>
+      <div class="def-box amber"><div class="def-title">Decimal Fraction <span>Definition</span></div><p>A fraction where the denominator is <strong>10 or a power of 10</strong> (10, 100, 1000, …). Because the denominator is always a power of 10, it can be written directly as a decimal.</p><div class="notation">0.a = a/10 &nbsp;|&nbsp; 0.ab = ab/100 &nbsp;|&nbsp; 0.abc = abc/1000</div></div>
+      <div class="note-box"><strong>📝 Decimal Fraction vs. Non-Decimal Fraction:</strong><br>1/10, 45/100, 34/1000 → <strong>decimal fractions</strong> (denominator is a power of 10)<br>2/5, 4/9, 21/489 → <strong>non-decimal fractions</strong> (denominator is not a power of 10)</div>
+      <p style="font-weight:700;color:var(--navy);margin:16px 0 8px;">Key Differences from Other Fractions</p>
+      <ul class="key-points">
+        <li><strong>Simplicity:</strong> a base-10 denominator makes them straightforward to read and write.</li>
+        <li><strong>Ease of comparison:</strong> lining up decimal points makes comparing values simple.</li>
+        <li><strong>Convenience:</strong> ideal for money, measurements, and percentages.</li>
+      </ul>
+      <div class="worked-example"><div class="we-q">Ex: Is 63/1000 a decimal fraction? Is 3/7?</div>
+        <button class="btn-reveal" id="we1-btn" onclick="revealStep('we1')">▶ Show Step-by-Step Solution</button>
+        <ol class="step-list" id="we1-steps">
+          <li class="step-line">A fraction only counts as a decimal fraction if its denominator is exactly a power of 10 — 10, 100, 1000, and so on.</li>
+          <li class="step-line">Check 63/1000: the denominator 1000 = 10³, which is a power of 10.</li>
+          <li class="step-line">So 63/1000 is a decimal fraction, and it can be written directly as 0.063.</li>
+          <li class="step-line">Check 3/7: the denominator 7 is not a power of 10, and cannot be turned into one by any simple scaling.</li>
+          <li class="step-line final-step">So <code>63/1000 is a decimal fraction, 3/7 is not</code></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="study-section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-icon" style="background:#dcfce7;">🔀</div>
+      <h2>Types of Decimal Fractions</h2><span class="toggle">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="def-box"><div class="def-title">Terminating Decimal <span>Definition</span></div><p>Ends after a finite number of digits. Can always be written as an exact fraction.</p><div class="notation">0.5, 0.75, 0.25 — all stop after a few digits</div></div>
+      <div class="def-box red"><div class="def-title">Non-Terminating Decimal <span>Definition</span></div><p>Continues indefinitely without ever stopping.</p><div class="notation">π ≈ 3.14159265… (goes on forever)</div></div>
+      <div class="def-box purple"><div class="def-title">Recurring Decimal <span>Definition</span></div><p>A non-terminating decimal with a digit or block of digits that repeats forever. Can still be written as an exact fraction.</p><div class="notation">0.3333… = 1/3 &nbsp;|&nbsp; 0.285714285714… = 2/7</div></div>
+      <div class="def-box teal"><div class="def-title">Non-Recurring Decimal <span>Definition</span></div><p>Non-terminating <strong>and</strong> the digits never settle into a repeating pattern. These are irrational — they cannot be written as an exact fraction.</p><div class="notation">√2 ≈ 1.41421356… &nbsp;|&nbsp; π ≈ 3.14159…</div></div>
+      <div class="note-box"><strong>📝 Key Fact:</strong> Only <strong>terminating</strong> and <strong>recurring</strong> decimals can be converted to an exact fraction p/q. Non-terminating, non-recurring decimals (irrational numbers) cannot.</div>
+      <div class="worked-example"><div class="we-q">Ex: Classify 0.6, 0.3333…, and 1.41421356… (=√2)</div>
+        <button class="btn-reveal" id="we2-btn" onclick="revealStep('we2')">▶ Show Step-by-Step Solution</button>
+        <ol class="step-list" id="we2-steps">
+          <li class="step-line">0.6 has exactly one digit after the decimal point and then stops — this is a terminating decimal.</li>
+          <li class="step-line">0.3333… has the digit 3 repeating forever in a fixed pattern — this is a recurring decimal.</li>
+          <li class="step-line">1.41421356… (√2) never stops and never falls into a repeating block — this is a non-terminating, non-recurring (irrational) decimal.</li>
+          <li class="step-line final-step">So: <code>0.6 → terminating</code>, <code>0.3333… → recurring</code>, <code>√2 → non-terminating & non-recurring</code></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="study-section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-icon" style="background:#fef3c7;">📍</div>
+      <h2>Place Value in Decimal Fractions</h2><span class="toggle">▼</span>
+    </div>
+    <div class="section-body">
+      <p style="margin-bottom:14px;font-size:.93rem;">Every digit's position relative to the decimal point gives it a specific value. Each place to the right of the decimal point is worth <strong>one-tenth</strong> of the place to its immediate left.</p>
+      <table class="unit-table">
+        <tr><th>Position (right of decimal point)</th><th>Name</th><th>Value</th></tr>
+        <tr><td>1st digit</td><td>Tenths</td><td>1/10</td></tr>
+        <tr><td>2nd digit</td><td>Hundredths</td><td>1/100</td></tr>
+        <tr><td>3rd digit</td><td>Thousandths</td><td>1/1000</td></tr>
+        <tr><td>4th digit</td><td>Ten-thousandths</td><td>1/10000</td></tr>
+      </table>
+      <div class="note-box"><strong>Note:</strong> In 127.45, the "127" is the whole number part and ".45" is the fractional part — the digit 4 is in the tenths place (worth 4/10) and 5 is in the hundredths place (worth 5/100).</div>
+      <div class="worked-example"><div class="we-q">Ex: What is the place value of 7 in 12.674?</div>
+        <button class="btn-reveal" id="we3-btn" onclick="revealStep('we3')">▶ Show Step-by-Step Solution</button>
+        <ol class="step-list" id="we3-steps">
+          <li class="step-line">Write out the number and look at the digits after the decimal point: 6, 7, 4.</li>
+          <li class="step-line">The first digit after the decimal (6) is in the tenths place, the second digit (7) is in the hundredths place.</li>
+          <li class="step-line">So the place value of 7 = 7 × (1/100) = 7/100.</li>
+          <li class="step-line final-step">Answer: <code>7/100 = 0.07</code></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="study-section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-icon" style="background:#ede9fe;">📊</div>
+      <h2>Summary Table</h2><span class="toggle">▼</span>
+    </div>
+    <div class="section-body">
+      <table class="summary-table">
+        <tr><th>Type</th><th>Description</th><th>Example</th></tr>
+        <tr><td><strong>Terminating</strong></td><td>Ends after finite digits</td><td>0.5, 0.75</td></tr>
+        <tr><td><strong>Non-terminating</strong></td><td>Continues indefinitely</td><td>π ≈ 3.14159…</td></tr>
+        <tr><td><strong>Recurring</strong></td><td>Repeats a digit/block forever</td><td>0.333…, 0.142857…</td></tr>
+        <tr><td><strong>Non-recurring</strong></td><td>Never repeats, never ends (irrational)</td><td>√2 ≈ 1.41421356…</td></tr>
+      </table>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ══════ OPERATIONS PAGE ══════ -->
+<div id="page-operations" class="page">
+<div class="container">
+
+  <div class="study-section">
+    <div class="section-header open" onclick="toggleSection(this)">
+      <div class="section-icon" style="background:#dbeafe;">➕</div>
+      <h2>Addition & Subtraction of Decimal Fractions</h2><span class="toggle">▼</span>
+    </div>
+    <div class="section-body open">
+      <ul class="key-points">
+        <li><strong>Step 1:</strong> Line up the decimal points of the numbers being added or subtracted.</li>
+        <li><strong>Step 2:</strong> Add trailing zeros so both numbers have the same number of decimal places.</li>
+        <li><strong>Step 3:</strong> Add or subtract as you would whole numbers, keeping the decimal point in the same column.</li>
+      </ul>
+      <div class="note-box"><strong>💡 Tip:</strong> Always double-check the decimal points are aligned before adding or subtracting — this is the single most common source of error.</div>
+      <div class="worked-example"><div class="we-q">Ex: Add 12.4 + 0.75</div>
+        <button class="btn-reveal" id="we4-btn" onclick="revealStep('we4')">▶ Show Step-by-Step Solution</button>
+        <ol class="step-list" id="we4-steps">
+          <li class="step-line">12.4 has only one digit after the decimal, so add a trailing zero: 12.40.</li>
+          <li class="step-line">Line up the decimals: 12.40 and 0.75, decimal points in the same column.</li>
+          <li class="step-line">Add each column like whole numbers: 40+75=115, carry the 1: hundredths=5, tenths=1(carry)+4+7=... working it through gives 13.15.</li>
+          <li class="step-line final-step">Answer: <code>12.40 + 0.75 = 13.15</code></li>
+        </ol>
+      </div>
+      <div class="worked-example"><div class="we-q">Ex: Subtract 8.1 − 2.34</div>
+        <button class="btn-reveal" id="we5-btn" onclick="revealStep('we5')">▶ Show Step-by-Step Solution</button>
+        <ol class="step-list" id="we5-steps">
+          <li class="step-line">8.1 has only one digit after the decimal, so add a trailing zero: 8.10.</li>
+          <li class="step-line">Line up the decimals: 8.10 and 2.34, decimal points in the same column.</li>
+          <li class="step-line">Subtract each column, borrowing where necessary: 8.10 − 2.34.</li>
+          <li class="step-line final-step">Answer: <code>8.10 − 2.34 = 5.76</code></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="study-section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-icon" style="background:#dcfce7;">✖️</div>
+      <h2>Multiplication of Decimal Fractions</h2><span class="toggle">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="key-points">
+        <li><strong>Step 1:</strong> Ignore the decimal points and multiply the digits as whole numbers.</li>
+        <li><strong>Step 2:</strong> Count the total number of decimal digits in BOTH original numbers.</li>
+        <li><strong>Step 3:</strong> Place the decimal point in the product by counting that many digits from the right.</li>
+      </ul>
+      <div class="note-box"><strong>💡 Quick tip:</strong> To multiply by 10, 100, or 1000, just shift the decimal point right by as many places as there are zeros — e.g. 3.25 × 100 = 325.</div>
+      <div class="worked-example"><div class="we-q">Ex: Multiply 2.54 × 1.3</div>
+        <button class="btn-reveal" id="we6-btn" onclick="revealStep('we6')">▶ Show Step-by-Step Solution</button>
+        <ol class="step-list" id="we6-steps">
+          <li class="step-line">Ignore the decimals for now and multiply as whole numbers: 254 × 13 = 3302.</li>
+          <li class="step-line">Count the decimal digits: 2.54 has 2, and 1.3 has 1. Total = 2 + 1 = 3.</li>
+          <li class="step-line">Place the decimal point 3 digits from the right of 3302: 3.302.</li>
+          <li class="step-line final-step">Answer: <code>2.54 × 1.3 = 3.302</code></li>
+        </ol>
+      </div>
+      <div class="worked-example"><div class="we-q">Ex: Multiply 0.125 × 0.16</div>
+        <button class="btn-reveal" id="we7-btn" onclick="revealStep('we7')">▶ Show Step-by-Step Solution</button>
+        <ol class="step-list" id="we7-steps">
+          <li class="step-line">Ignore the decimals and multiply: 125 × 16 = 2000.</li>
+          <li class="step-line">Count the decimal digits: 0.125 has 3, and 0.16 has 2. Total = 3 + 2 = 5.</li>
+          <li class="step-line">Place the decimal point 5 digits from the right of 2000: 0.02000.</li>
+          <li class="step-line final-step">Answer: <code>0.125 × 0.16 = 0.02</code> (trailing zeros dropped)</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="study-section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-icon" style="background:#fef3c7;">➗</div>
+      <h2>Division of Decimal Fractions</h2><span class="toggle">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="key-points">
+        <li><strong>Step 1:</strong> Count the decimal digits in the divisor.</li>
+        <li><strong>Step 2:</strong> Move the decimal point the same number of places to the right in BOTH the divisor and dividend, making the divisor a whole number.</li>
+        <li><strong>Step 3:</strong> Divide as you would whole numbers, then place the decimal point in the quotient directly above its new position in the dividend.</li>
+      </ul>
+      <div class="worked-example"><div class="we-q">Ex: Divide 3.24 by 1.2</div>
+        <button class="btn-reveal" id="we8-btn" onclick="revealStep('we8')">▶ Show Step-by-Step Solution</button>
+        <ol class="step-list" id="we8-steps">
+          <li class="step-line">1.2 has one digit after the decimal, so move the decimal one place right in both numbers: 3.24 → 32.4, and 1.2 → 12.</li>
+          <li class="step-line">Now divide as whole-ish numbers: 32.4 ÷ 12.</li>
+          <li class="step-line">32.4 ÷ 12 = 2.7.</li>
+          <li class="step-line final-step">Answer: <code>3.24 ÷ 1.2 = 2.7</code></li>
+        </ol>
+      </div>
+      <div class="worked-example"><div class="we-q">Ex: A recipe calls for 3.2 cups of flour, but the only measuring cup holds 0.75 cups. How many full scoops are needed?</div>
+        <button class="btn-reveal" id="we9-btn" onclick="revealStep('we9')">▶ Show Step-by-Step Solution</button>
+        <ol class="step-list" id="we9-steps">
+          <li class="step-line">0.75 has two decimal digits, so move the decimal two places right in both numbers: 3.2 → 320, and 0.75 → 75.</li>
+          <li class="step-line">Now divide: 320 ÷ 75 = 4.2 (approximately).</li>
+          <li class="step-line">Since only whole scoops count, 4 full scoops give enough flour, with a little left over.</li>
+          <li class="step-line final-step">Answer: <code>4 full scoops</code></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="study-section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-icon" style="background:#ede9fe;">📊</div>
+      <h2>Operations Summary</h2><span class="toggle">▼</span>
+    </div>
+    <div class="section-body">
+      <table class="summary-table">
+        <tr><th>Operation</th><th>Key Rule</th><th>Example</th></tr>
+        <tr><td><strong>Addition/Subtraction</strong></td><td>Align decimal points, pad with zeros</td><td>12.40+0.75=13.15</td></tr>
+        <tr><td><strong>Multiplication</strong></td><td>Multiply as whole numbers, then place decimal by counting total decimal digits</td><td>2.54×1.3=3.302</td></tr>
+        <tr><td><strong>Division</strong></td><td>Shift decimal in both numbers to make divisor whole</td><td>3.24÷1.2=2.7</td></tr>
+      </table>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ══════ CONVERSION PAGE ══════ -->
+<div id="page-conversion" class="page">
+<div class="container">
+
+  <div class="study-section">
+    <div class="section-header open" onclick="toggleSection(this)">
+      <div class="section-icon" style="background:#dbeafe;">🔟</div>
+      <h2>Method 1: Multiply by a Power of 10</h2><span class="toggle">▼</span>
+    </div>
+    <div class="section-body open">
+      <ul class="key-points">
+        <li><strong>Step 1:</strong> Count the number of digits after the decimal point.</li>
+        <li><strong>Step 2:</strong> Multiply the decimal by 10 raised to that count, moving the decimal point all the way to the right.</li>
+        <li><strong>Step 3:</strong> Write the resulting whole number over the matching power of 10, then simplify.</li>
+      </ul>
+      <div class="worked-example"><div class="we-q">Ex: Convert 0.75 to a fraction</div>
+        <button class="btn-reveal" id="wc1-btn" onclick="revealStep('wc1')">▶ Show Step-by-Step Solution</button>
+        <ol class="step-list" id="wc1-steps">
+          <li class="step-line">There are two digits after the decimal point (7 and 5).</li>
+          <li class="step-line">Multiply by 10² = 100: 0.75 × 100 = 75.</li>
+          <li class="step-line">Write 75 over 100: 75/100.</li>
+          <li class="step-line">Simplify by dividing both by their greatest common divisor, 25: 75÷25=3, 100÷25=4.</li>
+          <li class="step-line final-step">Answer: <code>0.75 = 3/4</code></li>
+        </ol>
+      </div>
+      <div class="worked-example"><div class="we-q">Ex: Convert 0.625 to a fraction</div>
+        <button class="btn-reveal" id="wc2-btn" onclick="revealStep('wc2')">▶ Show Step-by-Step Solution</button>
+        <ol class="step-list" id="wc2-steps">
+          <li class="step-line">There are three digits after the decimal point (6, 2 and 5).</li>
+          <li class="step-line">Multiply by 10³ = 1000: 0.625 × 1000 = 625.</li>
+          <li class="step-line">Write 625 over 1000: 625/1000.</li>
+          <li class="step-line">The greatest common divisor of 625 and 1000 is 125: 625÷125=5, 1000÷125=8.</li>
+          <li class="step-line final-step">Answer: <code>0.625 = 5/8</code></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="study-section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-icon" style="background:#dcfce7;">📐</div>
+      <h2>Method 2: Using Place Value</h2><span class="toggle">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="key-points">
+        <li><strong>Step 1:</strong> Identify the place value of each digit after the decimal point (tenths, hundredths, thousandths, …).</li>
+        <li><strong>Step 2:</strong> Write the whole run of digits after the decimal point as the numerator, over the matching place-value denominator.</li>
+        <li><strong>Step 3:</strong> Simplify the resulting fraction.</li>
+      </ul>
+      <div class="worked-example"><div class="we-q">Ex: Convert 0.75 to a fraction using place value</div>
+        <button class="btn-reveal" id="wc3-btn" onclick="revealStep('wc3')">▶ Show Step-by-Step Solution</button>
+        <ol class="step-list" id="wc3-steps">
+          <li class="step-line">0.7 = seven tenths = 7/10, and 0.05 = five hundredths = 5/100.</li>
+          <li class="step-line">Combine using a common denominator of 100: (7×10+5)/100 = 75/100.</li>
+          <li class="step-line">Simplify by dividing both by 25: 75÷25=3, 100÷25=4.</li>
+          <li class="step-line final-step">Answer: <code>0.75 = 3/4</code> — same result as Method 1</li>
+        </ol>
+      </div>
+      <div class="note-box"><strong>Remember:</strong> both methods always give the same equivalent fraction — pick whichever feels easier to you.</div>
+    </div>
+  </div>
+
+  <div class="study-section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-icon" style="background:#fee2e2;">➖</div>
+      <h2>Handling Negative Decimals</h2><span class="toggle">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="key-points">
+        <li><strong>Step 1:</strong> Drop the negative sign and treat the number as positive.</li>
+        <li><strong>Step 2:</strong> Convert to a fraction using either method above.</li>
+        <li><strong>Step 3:</strong> Reapply the negative sign to either the numerator or the denominator — never both.</li>
+      </ul>
+      <div class="note-box"><strong>⚠️ Misconception:</strong> Making both the numerator and denominator negative is wrong — the two negatives would cancel out and give a positive value again.</div>
+      <div class="worked-example"><div class="we-q">Ex: Convert −0.75 to a fraction</div>
+        <button class="btn-reveal" id="wc4-btn" onclick="revealStep('wc4')">▶ Show Step-by-Step Solution</button>
+        <ol class="step-list" id="wc4-steps">
+          <li class="step-line">Drop the negative sign: 0.75.</li>
+          <li class="step-line">Convert 0.75 to a fraction: 3/4.</li>
+          <li class="step-line">Reapply the negative sign to just one part.</li>
+          <li class="step-line final-step">Answer: <code>−0.75 = −3/4</code> (equivalently 3/−4)</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="study-section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-icon" style="background:#ede9fe;">🔁</div>
+      <h2>Converting Recurring Decimals to Fractions</h2><span class="toggle">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="def-box"><div class="def-title">Simple Decimal <span>Definition</span></div><p>A decimal that terminates and never repeats — straightforward to convert with Method 1 or 2.</p></div>
+      <div class="def-box purple"><div class="def-title">Recurring Decimal <span>Definition</span></div><p>A decimal with a repeating digit or block. Needs a small bit of algebra to convert to a fraction.</p></div>
+      <ul class="key-points">
+        <li><strong>Step 1:</strong> Let x equal the repeating decimal.</li>
+        <li><strong>Step 2:</strong> Multiply x by 10ⁿ, where n is the number of digits in the repeating block, so the decimal point shifts past one full block.</li>
+        <li><strong>Step 3:</strong> Subtract the original equation from the new one — this cancels the repeating part, leaving a whole number.</li>
+        <li><strong>Step 4:</strong> Solve for x and simplify.</li>
+      </ul>
+      <div class="worked-example"><div class="we-q">Ex: Convert 0.414141… to a fraction</div>
+        <button class="btn-reveal" id="wc5-btn" onclick="revealStep('wc5')">▶ Show Step-by-Step Solution</button>
+        <ol class="step-list" id="wc5-steps">
+          <li class="step-line">The repeating block "41" has 2 digits. Let x = 0.414141…</li>
+          <li class="step-line">Multiply both sides by 100 (since the block is 2 digits long): 100x = 41.4141…</li>
+          <li class="step-line">Subtract the original equation: 100x − x = 41.4141… − 0.4141… → 99x = 41.</li>
+          <li class="step-line">Divide both sides by 99: x = 41/99.</li>
+          <li class="step-line final-step">Answer: <code>0.414141… = 41/99</code></li>
+        </ol>
+      </div>
+      <div class="worked-example"><div class="we-q">Ex: Convert 0.142857142857… to a fraction</div>
+        <button class="btn-reveal" id="wc6-btn" onclick="revealStep('wc6')">▶ Show Step-by-Step Solution</button>
+        <ol class="step-list" id="wc6-steps">
+          <li class="step-line">The repeating block "142857" has 6 digits. Let x = 0.142857142857…</li>
+          <li class="step-line">Multiply both sides by 10⁶ = 1,000,000: 1000000x = 142857.142857…</li>
+          <li class="step-line">Subtract the original equation: 999999x = 142857.</li>
+          <li class="step-line">Divide both sides by 999999: x = 142857/999999, which simplifies to 1/7.</li>
+          <li class="step-line final-step">Answer: <code>0.142857142857… = 1/7</code></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="study-section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-icon" style="background:#dcfce7;">📊</div>
+      <h2>Conversion Chart</h2><span class="toggle">▼</span>
+    </div>
+    <div class="section-body">
+      <table class="unit-table">
+        <tr><th>Decimal</th><th>Fraction</th></tr>
+        <tr><td>0.1</td><td>1/10</td></tr>
+        <tr><td>0.01</td><td>1/100</td></tr>
+        <tr><td>0.25</td><td>1/4</td></tr>
+        <tr><td>0.5</td><td>1/2</td></tr>
+        <tr><td>0.75</td><td>3/4</td></tr>
+        <tr><td>0.222…</td><td>2/9</td></tr>
+        <tr><td>0.83333…</td><td>5/6</td></tr>
+        <tr><td>1.8</td><td>9/5</td></tr>
+      </table>
+      <table class="summary-table" style="margin-top:14px;">
+        <tr><th>Benefits</th><th>Limitations</th></tr>
+        <tr><td>Quick lookup without any calculation</td><td>Only covers common decimals, not every possible value</td></tr>
+        <tr><td>Helpful for beginners still learning place value</td><td>Doesn't handle recurring decimals directly — needs the algebra method</td></tr>
+      </table>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ══════ MCQ PAGE ══════ -->
+<div id="page-mcq" class="page">
+<div class="container">
+  <div id="mcq-intro" class="mcq-intro">
+    <h2>🎯 MCQ Test</h2>
+    <p>Complete all <strong>3 levels</strong> to earn your certificate. Each level has <strong>10 questions</strong>. Choices are shuffled every attempt.</p>
+    <div class="level-cards">
+      <div class="level-card easy" onclick="startQuiz('easy')">
+        <div class="lc-icon">🟢</div>
+        <div class="lc-title">Level 1 – Easy</div>
+        <div class="lc-sub">Definitions, place value, basic conversions</div>
+        <div class="lc-badge">10 Questions</div>
+        <div class="lc-status" id="status-easy"></div>
+      </div>
+      <div class="level-card medium" onclick="startQuiz('medium')">
+        <div class="lc-icon">🟡</div>
+        <div class="lc-title">Level 2 – Medium</div>
+        <div class="lc-sub">Conversions, operations, equations</div>
+        <div class="lc-badge">10 Questions</div>
+        <div class="lc-status" id="status-medium"></div>
+      </div>
+      <div class="level-card hard" onclick="startQuiz('hard')">
+        <div class="lc-icon">🔴</div>
+        <div class="lc-title">Level 3 – Hard</div>
+        <div class="lc-sub">Recurring decimals, advanced problems</div>
+        <div class="lc-badge">10 Questions</div>
+        <div class="lc-status" id="status-hard"></div>
+      </div>
+    </div>
+    <div class="overall-progress" id="overall-progress">
+      <div class="op-label">Overall Progress: <span id="op-count">0</span> / 3 levels completed</div>
+      <div class="progress-bar-bg op-bar"><div class="progress-bar-fill" id="op-fill" style="width:0%"></div></div>
+      <div class="op-hint" id="op-hint">Finish all 3 levels to unlock your certificate.</div>
+    </div>
+  </div>
+
+  <div id="quiz-area" class="quiz-container">
+    <div class="quiz-header">
+      <div class="qh-left">
+        <h3 id="quiz-level-title">Quiz</h3>
+        <p id="quiz-subtitle">10 Questions — Good luck!</p>
+      </div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-label"><span>Progress</span><span id="prog-text">0 / 10</span></div>
+        <div class="progress-bar-bg"><div class="progress-bar-fill" id="prog-fill" style="width:0%"></div></div>
+      </div>
+    </div>
+    <div id="question-area"></div>
+    <div class="quiz-nav">
+      <button class="btn btn-secondary" onclick="backToIntro()">← Back</button>
+      <button class="btn btn-primary" id="btn-next" onclick="nextQuestion()" style="display:none">Next →</button>
+      <button class="btn btn-success" id="btn-submit" onclick="submitQuiz()" style="display:none">Submit ✓</button>
+    </div>
+  </div>
+
+  <div id="results-area" style="display:none">
+    <div class="results-panel">
+      <div class="score-ring" id="score-ring">
+        <span id="score-pct">0%</span>
+        <span class="score-label">Score</span>
+      </div>
+      <h3 id="results-title">Quiz Complete!</h3>
+      <p id="results-msg"></p>
+      <div class="result-stats">
+        <div class="result-stat rs-correct"><div class="rs-num" id="rs-correct">0</div><div class="rs-lbl">Correct</div></div>
+        <div class="result-stat rs-wrong"><div class="rs-num" id="rs-wrong">0</div><div class="rs-lbl">Wrong</div></div>
+        <div class="result-stat rs-score"><div class="rs-num" id="rs-score">0%</div><div class="rs-lbl">Score</div></div>
+      </div>
+      <p id="results-next-hint" style="font-size:.85rem;color:var(--muted);margin-bottom:18px;"></p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <button class="btn btn-primary" onclick="startQuiz(currentLevel)">🔁 Retry</button>
+        <button class="btn btn-secondary" onclick="backToIntro()">← Choose Level</button>
+        <button class="btn btn-accent" onclick="startNextLevel()" id="btn-next-level" style="display:none">Next Level →</button>
+        <button class="btn btn-accent" onclick="showCertFlow()" id="btn-cert" style="display:none">🏆 Get Certificate</button>
+      </div>
+      <div id="review-area" style="margin-top:26px;text-align:left;"></div>
+    </div>
+  </div>
+
+  <div id="reg-area" style="display:none">
+    <div class="reg-panel">
+      <h3>🎓 Get Your Certificate</h3>
+      <p>All 3 levels complete! Enter your details to generate a personalized certificate.</p>
+      <div class="cert-prefill-scores" id="cert-prefill-scores"></div>
+      <div class="form-group"><label>Full Name *</label><input type="text" id="reg-name" placeholder="Your full name"></div>
+      <div class="form-row">
+        <div class="form-group"><label>Institution</label><input type="text" id="reg-inst" placeholder="School / College"></div>
+        <div class="form-group"><label>Class / Grade</label><input type="text" id="reg-class" placeholder="e.g. 10th Grade"></div>
+      </div>
+      <div class="form-group"><label>Date</label><input type="date" id="reg-date"></div>
+      <button class="btn btn-success" style="width:100%;margin-top:8px" onclick="generateCertificate()">Generate Certificate 🏆</button>
+    </div>
+  </div>
+
+  <div id="certificate-wrapper">
+    <div class="cert-container">
+      <div id="certificate">
+        <div class="cert-header">
+          <div class="cert-org">Aptitude Mastery Program</div>
+          <div class="cert-title-main">Certificate of <span>Achievement</span></div>
+          <div class="cert-subtitle">Decimal Fractions</div>
+        </div>
+        <div class="cert-divider"></div>
+        <div class="cert-body">
+          <div class="cert-presented">This is to certify that</div>
+          <div class="cert-name" id="cert-name-display">—</div>
+          <div class="cert-class" id="cert-class-display"></div>
+          <div class="cert-desc">has successfully completed all <strong>3 levels</strong> of the Decimal Fractions course.</div>
+          <div class="cert-level-scores" id="cert-level-scores"></div>
+          <div class="cert-score-block">
+            <div class="cert-score-item"><div class="csn" id="cert-score-val">—</div><div class="csl">Overall Score</div></div>
+            <div class="cert-score-item"><div class="csn" id="cert-correct-val">—</div><div class="csl">Total Correct</div></div>
+          </div>
+          <div class="cert-grade" id="cert-grade-display">—</div>
+        </div>
+        <div class="cert-footer">
+          <div class="cert-sign-block">
+            <div class="cert-sign">
+              <img class="cert-sign-img" src="data:image/png;base64,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" alt="Signature of Mrs. Indhumathi T">
+              <div class="cert-sign-line">
+                <div class="cert-sign-name">Mrs. Indhumathi T</div>
+                <div class="cert-sign-role">Course Instructor</div>
+              </div>
+            </div>
+          </div>
+          <div class="cert-seal">AMP<br>CERTIFIED<br>★★★</div>
+        </div>
+        <div class="cert-id" id="cert-id-display"></div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:20px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <button class="btn btn-primary" onclick="downloadCert()">⬇ Download Certificate</button>
+      <button class="btn btn-secondary" onclick="backToIntro()">← Back to Quiz</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<script>
+// ══ NAVIGATION ══
+function showPage(id,el){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
+  if(el)el.classList.add('active');
+  if(id==='mcq')refreshIntroProgress();
+}
+function toggleSection(h){
+  h.classList.toggle('open');
+  h.nextElementSibling.classList.toggle('open');
+}
+
+// ══ INTERACTIVE STEP-BY-STEP SOLUTION REVEAL ══
+function revealStep(id){
+  const lines=document.querySelectorAll('#'+id+'-steps .step-line');
+  const btn=document.getElementById(id+'-btn');
+  let next=null;
+  for(const s of lines){ if(!s.classList.contains('revealed')){ next=s; break; } }
+  if(!next)return;
+  next.classList.add('revealed');
+  next.scrollIntoView({behavior:'smooth',block:'nearest'});
+  const revealedCount=document.querySelectorAll('#'+id+'-steps .step-line.revealed').length;
+  const total=lines.length;
+  if(revealedCount===total){
+    btn.innerHTML='↺ Solution Complete — Click to Restart';
+    btn.classList.add('btn-done');
+    btn.onclick=function(){resetSteps(id);};
+  }else{
+    btn.innerHTML='Next Step ('+revealedCount+'/'+total+') →';
+  }
+}
+function resetSteps(id){
+  document.querySelectorAll('#'+id+'-steps .step-line').forEach(s=>s.classList.remove('revealed'));
+  const btn=document.getElementById(id+'-btn');
+  btn.innerHTML='▶ Show Step-by-Step Solution';
+  btn.classList.remove('btn-done');
+  btn.onclick=function(){revealStep(id);};
+}
+
+// ══ QUESTION BANKS (50 per level) ══
+const questions={
+easy:[
+  {q:"Decimal fractions have a denominator that is a power of:",o:["2","5","10","3"],a:2,exp:"Decimal fractions are simply fractions whose denominator is 10 or a power of 10 (10, 100, 1000, ...). That's exactly what lets them be written directly as decimals."},
+  {q:"Which of the following is a decimal fraction?",o:["4/9","45/100","21/489","412/1212"],a:1,exp:"A decimal fraction must have a denominator that is a power of 10. Only 45/100 fits, since 100=10². The other denominators are not powers of 10."},
+  {q:"0.5 written as a fraction in simplest form is:",o:["1/2","1/4","5/10","1/5"],a:0,exp:"0.5 = 5/10. Dividing both the numerator and denominator by 5 gives 1/2."},
+  {q:"The first digit after the decimal point represents:",o:["Ones","Tenths","Hundredths","Thousandths"],a:1,exp:"Place values to the right of the decimal point start at tenths, then hundredths, then thousandths, and so on."},
+  {q:"0.3 written as a fraction is:",o:["3/100","3/10","1/3","3/1"],a:1,exp:"0.3 has one digit after the decimal point, so it means 3 tenths, written as 3/10."},
+  {q:"Which of these is a terminating decimal?",o:["1/3 = 0.333...","0.75","π = 3.14159...","√2 = 1.41421356..."],a:1,exp:"A terminating decimal ends after a finite number of digits. 0.75 stops after two digits, while the others continue forever."},
+  {q:"In 0.25, the digit 5 sits in the:",o:["Tenths place","Hundredths place","Thousandths place","Ones place"],a:1,exp:"Counting from the decimal point: 2 is in the tenths place, and 5 is the second digit, so it's in the hundredths place."},
+  {q:"Which of the following is a recurring decimal?",o:["0.5","0.75","0.333...","0.125"],a:2,exp:"0.333... has the digit 3 repeating forever in a fixed pattern, which is exactly what makes a decimal 'recurring'."},
+  {q:"0.125 as a fraction in simplest form is:",o:["1/4","1/8","1/2","3/8"],a:1,exp:"0.125 = 125/1000. Dividing both by their greatest common divisor, 125, gives 1/8."},
+  {q:"When adding 12.4 and 0.75, the first step should be to:",o:["Multiply the numbers","Align the decimal points","Round the numbers","Ignore the decimals entirely"],a:1,exp:"Before adding or subtracting decimals, always line up the decimal points so that digits of matching place value sit in the same column."},
+  {q:"0.6 written as a ratio of two integers in simplest form is:",o:["3/5","2/3","6/10","1/2"],a:0,exp:"0.6 = 6/10. The greatest common divisor of 6 and 10 is 2, so dividing both gives 3/5."},
+  {q:"To multiply two decimals, we:",o:["Align the decimal points first","Ignore the decimals, multiply, then place the point back by counting decimal digits","Always round to whole numbers first","Add zeros before multiplying"],a:1,exp:"When multiplying decimals, first multiply as if there were no decimal points, then place the decimal point in the answer by counting the total decimal digits in both original numbers."},
+  {q:"A decimal with 3 digits after the decimal point has a denominator (before simplifying) of:",o:["10","100","1000","10000"],a:2,exp:"Each digit after the decimal point adds another power of 10 to the denominator — 3 digits means the denominator is 10³ = 1000."},
+  {q:"To convert 0.75 to a whole number by multiplying by a power of 10, we multiply by:",o:["10","100","1000","10000"],a:1,exp:"0.75 has two digits after the decimal point, so multiplying by 10² = 100 shifts the decimal point all the way to the right, giving 75."},
+  {q:"The decimal equivalent of 7/8 is:",o:["0.75","0.875","0.85","0.95"],a:1,exp:"Dividing 7 by 8 gives 0.875 exactly — this is a terminating decimal since 8 = 2³ (only factors of 2 and 5 in the denominator give terminating decimals)."},
+  {q:"Which of the following is NOT a decimal fraction?",o:["1/10","45/100","2/5","34/1000"],a:2,exp:"2/5 has a denominator of 5, which is not a power of 10 — so it isn't a decimal fraction by definition, even though it can still be converted to a decimal (0.4)."}
+],
+medium:[
+  {q:"0.625 expressed as a fraction in its lowest terms is:",o:["5/3","11/7","9/14","5/8"],a:3,exp:"0.625 = 625/1000. The greatest common divisor of 625 and 1000 is 125, so dividing both gives 5/8."},
+  {q:"0.36 expressed as a fraction is:",o:["7/20","4/11","5/16","9/25"],a:3,exp:"0.36 = 36/100. The greatest common divisor of 36 and 100 is 4, so dividing both gives 9/25."},
+  {q:"0.008 written as a fraction in lowest terms is:",o:["10/11","1/125","7/25","12/51"],a:1,exp:"0.008 = 8/1000. The greatest common divisor of 8 and 1000 is 8, so dividing both gives 1/125."},
+  {q:"Multiply 2.54 × 1.3. The result is:",o:["3.302","33.02","0.3302","330.2"],a:0,exp:"Multiplying 254 × 13 gives 3302. Since there are 2+1=3 decimal digits total in the original numbers, the decimal point goes 3 places from the right: 3.302."},
+  {q:"The product of 0.125 and 0.16, expressed as a decimal fraction, is:",o:["0.0025","0.35","0.14","0.02"],a:3,exp:"Multiplying 125 × 16 gives 2000. With 3+2=5 decimal digits total, placing the decimal 5 places from the right gives 0.02000, which simplifies to 0.02."},
+  {q:"Divide 3.24 by 1.2. The result is:",o:["2.7","27","0.27","270"],a:0,exp:"Move the decimal one place right in both numbers (since 1.2 has one decimal digit): 32.4 ÷ 12 = 2.7."},
+  {q:"If 0.07x = 0.105, what is the value of x?",o:["1.75","1.25","1.5","2.5"],a:2,exp:"x = 0.105/0.07. Moving the decimal two places right in both numbers gives 10.5/7 = 1.5."},
+  {q:"Solve 2x − 0.3 = 0.7x + 0.02 for x:",o:["0.25","0.32","0.14","0.21"],a:0,exp:"Rearranging: 2x−0.7x = 0.3+0.02, so 1.3x = 0.32, which gives x = 0.32/1.3 ≈ 0.25."},
+  {q:"Subtract: 8.1 − 2.34 =",o:["5.76","5.86","6.76","4.76"],a:0,exp:"Align the decimals (8.10 − 2.34) and subtract column by column, borrowing where needed, to get 5.76."},
+  {q:"0.1625 expressed as a fraction in simplest form is:",o:["4/25","5/24","13/80","8/39"],a:2,exp:"0.1625 = 1625/10000. The greatest common divisor is 125, so dividing both gives 13/80."},
+  {q:"If x = 0.142857 and 1000x is calculated, the result 142.857 shows that 0.142857 is closely related to the fraction:",o:["1/7","1/6","1/9","1/11"],a:0,exp:"0.142857 is the repeating block of the decimal expansion of 1/7 — dividing 1 by 7 gives exactly 0.142857142857..."},
+  {q:"A recipe calls for 3.2 cups of flour, but the only measuring cup holds 0.75 cups. How many full scoops give enough flour?",o:["4","6","1.2","2.3"],a:0,exp:"3.2 ÷ 0.75 ≈ 4.27, meaning 4 full scoops provide enough flour (with a bit to spare), since a 5th scoop isn't needed."},
+  {q:"0.8642 converted to a fraction in its lowest terms is:",o:["432/625","4321/5000","54/625","432/5000"],a:1,exp:"0.8642 = 8642/10000. The greatest common divisor is 2, so dividing both gives 4321/5000, which cannot be simplified further."},
+  {q:"3.625 written as a fraction is:",o:["29/8","28/8","27/8","26/8"],a:0,exp:"3.625 = 3 + 0.625 = 3 + 5/8 = (24+5)/8 = 29/8."},
+  {q:"Convert 2.125 into a fraction:",o:["17/8","21/8","23/10","19/9"],a:0,exp:"2.125 = 2 + 0.125 = 2 + 1/8 = (16+1)/8 = 17/8."},
+  {q:"If 0.4 of a number is 32, what is the number?",o:["50","60","80","100"],a:2,exp:"0.4 × (number) = 32, so number = 32/0.4 = 320/4 = 80."}
+],
+hard:[
+  {q:"Express the recurring decimal 0.7777... as a fraction:",o:["7/9","7/10","7/11","8/7"],a:0,exp:"Let x=0.7777... Then 10x=7.7777... Subtracting: 10x−x=7, so 9x=7, giving x=7/9."},
+  {q:"What is the fraction equivalent of the recurring decimal 0.373737...?",o:["37/99","37/100","37/98","11/29"],a:0,exp:"Let x=0.373737... The repeating block '37' has 2 digits, so 100x=37.3737... Subtracting: 99x=37, giving x=37/99."},
+  {q:"Convert the recurring decimal 0.414141... to a fraction:",o:["41/99","41/100","4/9","14/33"],a:0,exp:"Let x=0.414141... Multiplying by 100 (2-digit repeating block) gives 100x=41.4141... Subtracting the original: 99x=41, so x=41/99."},
+  {q:"The repeating decimal 0.142857142857... is equivalent to the fraction:",o:["1/7","1/6","1/9","1/11"],a:0,exp:"The 6-digit block '142857' repeats forever in the decimal expansion of 1/7 — dividing 1 by 7 gives exactly this pattern."},
+  {q:"Convert 0.1666... (repeating) into a fraction:",o:["1/5","1/6","1/7","1/8"],a:1,exp:"Let x=0.1666... Then 10x=1.666... and 100x=16.666... Subtracting: 90x=15, so x=15/90=1/6."},
+  {q:"Express the decimal 0.575 as a fraction in simplest form:",o:["115/200","23/50","23/40","23/80"],a:2,exp:"0.575 = 575/1000. The greatest common divisor of 575 and 1000 is 25, so dividing both gives 23/40."},
+  {q:"Which of these decimals CANNOT be expressed as an exact fraction p/q?",o:["0.5","0.333...","√2 = 1.41421356...","0.75"],a:2,exp:"√2 never terminates and never falls into a repeating pattern — that makes it irrational, and irrational numbers cannot be written as an exact fraction of two integers."},
+  {q:"When converting a recurring decimal whose repeating block has 2 digits, we multiply the original equation by:",o:["10","100","1000","2"],a:1,exp:"The multiplier must shift the decimal point past one entire repeating block. Since the block has 2 digits, we multiply by 10² = 100."},
+  {q:"Let x = 0.3333... Which equation correctly leads to solving for x as a fraction?",o:["9x = 3, so x = 3/9 = 1/3","10x − x = 3, so 9x = 3, giving x = 1/3","Both of the above are valid ways to state it","Neither is correct"],a:2,exp:"Both statements describe the same correct algebra: multiplying by 10 gives 10x=3.333..., subtracting x gives 9x=3, and solving gives x=1/3."},
+  {q:"5/6 produces a recurring (non-terminating) decimal mainly because:",o:["The denominator 6 has a prime factor of 3, which isn't 2 or 5","The denominator 6 is even","The numerator 5 is prime","None of these"],a:0,exp:"A fraction produces a terminating decimal only if, once fully simplified, its denominator's only prime factors are 2 and/or 5. Since 6=2×3, the extra factor of 3 forces the decimal to recur."},
+  {q:"Which of these fractions gives a terminating decimal?",o:["1/3","1/6","1/8","1/7"],a:2,exp:"1/8 terminates because 8=2³ — its denominator's only prime factor is 2. The others (3, 6, 7) all include a prime factor other than 2 or 5, so they recur instead."},
+  {q:"−0.75 expressed as a fraction is best written as:",o:["3/4","−3/4","3/−4 (equally valid as −3/4)","None of these"],a:2,exp:"Only one part of the fraction — either the numerator or the denominator — should carry the negative sign. −3/4 and 3/−4 represent exactly the same value, so both are valid answers."},
+  {q:"Which decimal below terminates using exactly 3 decimal places, matching a denominator of 1000?",o:["0.5","0.75","0.625","0.6"],a:2,exp:"0.625 has exactly three digits after the decimal point, matching 625/1000 directly (before it simplifies further to 5/8)."},
+  {q:"If 100x = 41.4141... and x = 0.414141..., what does 99x equal?",o:["41","4.1","414","4.14"],a:0,exp:"Subtracting the second equation from the first cancels the repeating part: 100x − x = 41.4141... − 0.4141... = 41, so 99x = 41."}
+]
+};
+
+// ══ QUIZ LOGIC ══
+const LEVEL_ORDER=['easy','medium','hard'];
+const LEVEL_TITLES={easy:'🟢 Level 1 – Easy',medium:'🟡 Level 2 – Medium',hard:'🔴 Level 3 – Hard'};
+let currentLevel='easy',currentQ=0,answers=[],answered=false;
+let scores={easy:null,medium:null,hard:null};
+let activeQuestions={};
+
+function shuffle(arr){
+  const a=[...arr];
+  for(let i=a.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+function completedCount(){return LEVEL_ORDER.filter(l=>scores[l]!==null).length;}
+
+function refreshIntroProgress(){
+  LEVEL_ORDER.forEach(l=>{
+    const el=document.getElementById('status-'+l);
+    if(!el)return;
+    if(scores[l]){
+      el.textContent='Completed — '+scores[l].pct+'%';
+      el.classList.add('done');
+    }else{
+      el.textContent='';
+      el.classList.remove('done');
+    }
+  });
+  const done=completedCount();
+  document.getElementById('op-count').textContent=done;
+  document.getElementById('op-fill').style.width=(done/3*100)+'%';
+  const hint=document.getElementById('op-hint');
+  if(done>=3){
+    hint.textContent='🏆 All levels complete! Click any level card to retry, or generate your certificate below.';
+    hint.classList.add('ready');
+    if(!document.getElementById('intro-cert-btn')){
+      const btn=document.createElement('button');
+      btn.id='intro-cert-btn';
+      btn.className='btn btn-accent cert-cta';
+      btn.textContent='🏆 Get Certificate';
+      btn.onclick=showCertFlow;
+      document.getElementById('overall-progress').appendChild(btn);
+    }
+  }else{
+    hint.textContent='Finish all 3 levels to unlock your certificate.';
+    hint.classList.remove('ready');
+    const btn=document.getElementById('intro-cert-btn');
+    if(btn)btn.remove();
+  }
+}
+
+function startQuiz(level){
+  currentLevel=level; currentQ=0; answers=[]; answered=false;
+  // Pick 10 questions from the level's question bank, shuffled
+  const pool=shuffle(questions[level]).slice(0,10);
+  // Shuffle options within each question
+  activeQuestions[level]=pool.map(q=>{
+    const correctText=q.o[q.a];
+    const shuffledOpts=shuffle([...q.o]);
+    return {...q,o:shuffledOpts,a:shuffledOpts.indexOf(correctText)};
+  });
+  document.getElementById('mcq-intro').style.display='none';
+  document.getElementById('quiz-area').classList.add('active');
+  document.getElementById('results-area').style.display='none';
+  document.getElementById('reg-area').style.display='none';
+  document.getElementById('certificate-wrapper').style.display='none';
+  document.getElementById('quiz-level-title').textContent=LEVEL_TITLES[level];
+  renderQuestion();
+}
+
+function renderQuestion(){
+  const qs=activeQuestions[currentLevel];
+  const q=qs[currentQ];
+  const total=qs.length;
+  document.getElementById('prog-text').textContent=(currentQ+1)+' / '+total;
+  document.getElementById('prog-fill').style.width=((currentQ+1)/total*100)+'%';
+  document.getElementById('btn-next').style.display='none';
+  document.getElementById('btn-submit').style.display='none';
+  answered=false;
+  const keys=['A','B','C','D'];
+  let html='<div class="question-card">';
+  html+='<div class="q-number">Question '+(currentQ+1)+' of '+total+'</div>';
+  html+='<div class="q-text">'+q.q+'</div>';
+  html+='<div class="options" id="opts">';
+  q.o.forEach((opt,i)=>{
+    html+='<div class="option" id="opt-'+i+'" onclick="selectOption('+i+')">';
+    html+='<div class="option-key">'+keys[i]+'</div>';
+    html+='<div class="option-text">'+opt+'</div></div>';
+  });
+  html+='</div>';
+  html+='<div class="explanation" id="exp"><strong>💡 Explanation:</strong> '+q.exp+'</div>';
+  html+='</div>';
+  document.getElementById('question-area').innerHTML=html;
+}
+
+function selectOption(idx){
+  if(answered)return;
+  answered=true;
+  const q=activeQuestions[currentLevel][currentQ];
+  answers.push({qtext:q.q,selected:idx,correct:q.a,isCorrect:idx===q.a,selectedText:q.o[idx],correctText:q.o[q.a],exp:q.exp});
+  document.querySelectorAll('.option').forEach((el,i)=>{
+    if(i===q.a)el.classList.add('correct');
+    else if(i===idx&&idx!==q.a)el.classList.add('wrong');
+    if(i===idx)el.classList.add('selected');
+  });
+  document.getElementById('exp').classList.add('show');
+  if(currentQ<9)document.getElementById('btn-next').style.display='inline-block';
+  else document.getElementById('btn-submit').style.display='inline-block';
+}
+
+function nextQuestion(){currentQ++;renderQuestion();}
+
+function submitQuiz(){
+  document.getElementById('quiz-area').classList.remove('active');
+  const correct=answers.filter(a=>a.isCorrect).length;
+  const total=10;
+  const pct=Math.round(correct/total*100);
+  scores[currentLevel]={correct,total,pct};
+  document.getElementById('results-area').style.display='block';
+  const ring=document.getElementById('score-ring');
+  ring.style.background=pct>=80?'var(--accent2)':pct>=50?'var(--accent)':'var(--red)';
+  document.getElementById('score-pct').textContent=pct+'%';
+  document.getElementById('rs-correct').textContent=correct;
+  document.getElementById('rs-wrong').textContent=total-correct;
+  document.getElementById('rs-score').textContent=pct+'%';
+  document.getElementById('results-title').textContent=pct>=60?'Great Job! 🎉':'Keep Practicing! 💪';
+  const msgs=['Keep going!','Good attempt!','Well done!','Excellent!','Outstanding!'];
+  const lvl=pct>=90?4:pct>=75?3:pct>=60?2:pct>=40?1:0;
+  document.getElementById('results-msg').textContent=msgs[lvl]+' You scored '+correct+' out of '+total+'.';
+
+  // Determine next incomplete level
+  const idx=LEVEL_ORDER.indexOf(currentLevel);
+  const nextLevel=LEVEL_ORDER[idx+1];
+  const allDone=completedCount()===3;
+  const btnNext=document.getElementById('btn-next-level');
+  const btnCert=document.getElementById('btn-cert');
+  const hintEl=document.getElementById('results-next-hint');
+  if(allDone){
+    btnNext.style.display='none';
+    btnCert.style.display='inline-block';
+    hintEl.textContent='🏆 All 3 levels complete! You can now generate your certificate.';
+  }else if(nextLevel){
+    btnNext.style.display='inline-block';
+    btnCert.style.display='none';
+    btnNext.textContent='Next Level: '+(nextLevel==='medium'?'Medium 🟡':'Hard 🔴')+' →';
+    hintEl.textContent='Complete all 3 levels to unlock your certificate.';
+  }else{
+    btnNext.style.display='none';
+    btnCert.style.display='none';
+    hintEl.textContent='Complete the remaining level(s) to unlock your certificate.';
+  }
+
+  let rv='<h4 style="font-weight:700;color:var(--navy);margin-bottom:6px;">📋 Detailed Answer Review</h4>';
+  rv+='<p style="font-size:.82rem;color:var(--muted);margin-bottom:14px;">Every question below includes the correct answer and a simple, step-by-step explanation.</p>';
+  rv+='<table class="review-table"><tr><th>#</th><th>Question &amp; Explanation</th><th>Your Answer</th><th>Correct Answer</th><th>Result</th></tr>';
+  answers.forEach((a,i)=>{
+    rv+='<tr><td>'+(i+1)+'</td><td>'+a.qtext+'<div class="rv-exp">💡 '+a.exp+'</div></td><td>'+a.selectedText+'</td><td>'+a.correctText+'</td>';
+    rv+='<td class="'+(a.isCorrect?'rv-correct':'rv-wrong')+'">'+(a.isCorrect?'✓':'✗')+'</td></tr>';
+  });
+  rv+='</table>';
+  document.getElementById('review-area').innerHTML=rv;
+}
+
+function startNextLevel(){
+  const idx=LEVEL_ORDER.indexOf(currentLevel);
+  const nextLevel=LEVEL_ORDER[idx+1];
+  if(nextLevel)startQuiz(nextLevel);
+}
+
+function showCertFlow(){
+  if(completedCount()<3){
+    alert('Please complete all 3 levels (Easy, Medium, Hard) before generating your certificate.');
+    return;
+  }
+  document.getElementById('mcq-intro').style.display='none';
+  document.getElementById('quiz-area').classList.remove('active');
+  document.getElementById('results-area').style.display='none';
+  document.getElementById('certificate-wrapper').style.display='none';
+  document.getElementById('reg-area').style.display='block';
+  document.getElementById('reg-date').value=new Date().toISOString().split('T')[0];
+  const labels={easy:'Level 1 (Easy)',medium:'Level 2 (Medium)',hard:'Level 3 (Hard)'};
+  let html='';
+  LEVEL_ORDER.forEach(l=>{
+    html+='<div class="cps-item"><div class="cps-lvl">'+labels[l]+'</div><div class="cps-pct">'+scores[l].pct+'%</div></div>';
+  });
+  document.getElementById('cert-prefill-scores').innerHTML=html;
+}
+
+function backToIntro(){
+  document.getElementById('mcq-intro').style.display='block';
+  document.getElementById('quiz-area').classList.remove('active');
+  document.getElementById('results-area').style.display='none';
+  document.getElementById('reg-area').style.display='none';
+  document.getElementById('certificate-wrapper').style.display='none';
+  refreshIntroProgress();
+}
+
+function generateCertificate(){
+  const name=document.getElementById('reg-name').value.trim();
+  if(!name){alert('Please enter your name.');return;}
+  if(completedCount()<3){
+    alert('Please complete all 3 levels before generating your certificate.');
+    return;
+  }
+  const inst=document.getElementById('reg-inst').value.trim();
+  const cls=document.getElementById('reg-class').value.trim();
+  const date=document.getElementById('reg-date').value;
+  const dateStr=date?new Date(date).toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'}):new Date().toLocaleDateString('en-IN');
+
+  const totalCorrect=LEVEL_ORDER.reduce((sum,l)=>sum+scores[l].correct,0);
+  const totalQuestions=LEVEL_ORDER.reduce((sum,l)=>sum+scores[l].total,0);
+  const overallPct=Math.round(totalCorrect/totalQuestions*100);
+  const grade=overallPct>=90?'A+ - Distinction':overallPct>=80?'A - Excellent':overallPct>=70?'B - Very Good':overallPct>=60?'C - Good':'Pass';
+
+  document.getElementById('cert-name-display').textContent=name;
+  document.getElementById('cert-class-display').textContent=cls?'Class: '+cls:'';
+  document.getElementById('cert-score-val').textContent=overallPct+'%';
+  document.getElementById('cert-correct-val').textContent=totalCorrect+'/'+totalQuestions;
+  document.getElementById('cert-grade-display').textContent='Grade: '+grade;
+
+  const levelLabels={easy:'Level 1 – Easy',medium:'Level 2 – Medium',hard:'Level 3 – Hard'};
+  let lsHtml='';
+  LEVEL_ORDER.forEach(l=>{
+    lsHtml+='<div class="cert-level-item '+l+'"><div class="cli-label">'+levelLabels[l]+'</div><div class="cli-score">'+scores[l].correct+'/'+scores[l].total+' ('+scores[l].pct+'%)</div></div>';
+  });
+  document.getElementById('cert-level-scores').innerHTML=lsHtml;
+
+  const certId='AMP-DF-'+Date.now().toString(36).toUpperCase();
+  document.getElementById('cert-id-display').textContent='Certificate ID: '+certId+(inst?' | '+inst:'')+' | Issued: '+dateStr;
+  document.getElementById('reg-area').style.display='none';
+  document.getElementById('certificate-wrapper').style.display='block';
+  document.getElementById('certificate-wrapper').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function downloadCert(){
+  const cert=document.getElementById('certificate');
+  html2canvas(cert,{scale:2,backgroundColor:'#ffffff'}).then(canvas=>{
+    const a=document.createElement('a');
+    a.download='DecimalFraction_Certificate_AMP.png';
+    a.href=canvas.toDataURL('image/png');
+    a.click();
+  });
+}
+</script>
+</html>
